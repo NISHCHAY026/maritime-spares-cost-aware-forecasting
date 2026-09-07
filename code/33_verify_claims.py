@@ -226,6 +226,32 @@ def main():
         add("stable bootstrap statistic reported", ["0.0014"], [],
             "P(rho <= 0) is reported alongside the percentile interval")
 
+    # --- scale family (the placebo demonstration) --------------------------
+    sf = load("scaled_family.json")
+    if sf:
+        add("scale family reported", ["-0.486", "scale factor"], [],
+            "six k-scaled SBA copies reproduce the regime pattern; stockout-dom "
+            "rho is -0.486 with cost U-shaped in k")
+        add("scale-family theorem verified", ["100.0"], [],
+            "MAE strictly increasing in k on 100.0% of zero-median active SKUs")
+
+    # --- specification fragility (nine evaluation designs) ------------------
+    se = load("simulator_exercise.json")
+    if se:
+        add("fragility grid reported", ["-0.103", "+0.685", "nine"], [],
+            "the fleet-level correlation moves across its range under nine designs")
+        add("tau stability reported", ["+0.333", "+0.435"], [],
+            "per-SKU tau is stable across all nine designs")
+        add("start-position result reported", ["72.3", "36.2", "+0.418"], [],
+            "empty start exercises the policy and the correlation barely moves")
+        add("sampling vs specification uncertainty",
+            ["smaller of the two uncertainties"], [],
+            "the SKU-bootstrap interval is presented as the narrower uncertainty")
+        add("old framing retired", [],
+            ["The boundary is visible:",
+             "prediction, reproduced on independent operational"],
+            "the replication framing must not survive as a claim about forecast quality")
+
     # --- run --------------------------------------------------------------
     # The reproducibility note deliberately quotes superseded values ("moved
     # from +204 % to -59.6 %"). Forbidden-string checks run on the body only,

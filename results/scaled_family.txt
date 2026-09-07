@@ -1,0 +1,29 @@
+THE SCALE FAMILY: k x SBA FOR k IN (0.25, 0.5, 0.75, 1.0, 1.5, 2.0)
+==============================================================================
+
+Six 'forecasters' that differ only by a multiplicative constant. They
+contain identical information about demand, so any accuracy-cost
+relationship among them is a level effect by construction.
+
+1. FLEET-LEVEL rho(mean MAE, mean cost) ACROSS THE SIX VARIANTS
+   all SKUs             +1.000  (p=0.000)
+   stockout-dominated   -0.486  (p=0.329)   n=14,861
+   holding-dominated    +1.000  (p=0.000)   n=487
+
+2. MEAN MAE AND MEAN COST BY k
+        k       MAE    cost all  stockout-dom  holding-dom
+     0.25     6.903       2,230           563       53,117
+     0.50     7.383       2,312           498       57,667
+     0.75     8.046       2,432           474       62,196
+     1.00     8.916       2,573           470       66,745
+     1.50    11.207       2,870           478       75,858
+     2.00    14.162       3,179           498       84,991
+
+3. PER-SKU: IS MAE STRICTLY INCREASING IN k?
+   among SKUs with a positive base forecast and zero test median: 100.0 %
+   among all SKUs with a positive base forecast: 68.8 %
+
+4. READING
+   If the regime pattern (positive where holding dominates, negative where
+   stockouts dominate) appears here, it appears among forecasts with no
+   information differences, so it cannot be evidence about forecast quality.

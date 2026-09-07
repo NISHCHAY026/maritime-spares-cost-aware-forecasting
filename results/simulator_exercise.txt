@@ -1,0 +1,46 @@
+DOES THE COST RESULT SURVIVE A POLICY THAT ACTUALLY REORDERS?
+======================================================================================
+
+N = 15,348 SKUs. Crossover between holding- and stockout-dominated is $1,600.
+
+1. DID THE POLICY ACTUALLY RUN?
+   ARM                       ordered  orders/SKU   holding  stockout    fill   mean cost
+   published      S / H=4      18.2%        0.25     90.5%      9.1%   0.966       2,658
+   mid-cycle    mid / H=4      26.2%        0.36     88.9%     10.4%   0.954       2,654
+   at reorder     s / H=4      36.3%        0.48     87.2%     11.9%   0.932       2,657
+   empty       zero / H=4      72.3%        0.87     62.2%     36.2%   0.830       2,777
+   train12        S / H=4      18.9%        0.26     65.3%     34.0%   0.953       1,749
+   train12      mid / H=4      27.8%        0.38     62.9%     36.0%   0.937       1,749
+   published      S / H=8      28.6%        0.56     74.8%     24.6%   0.919       4,188
+   mid-cycle    mid / H=8      36.2%        0.69     73.5%     25.7%   0.899       4,173
+   empty       zero / H=8      66.2%        1.11     58.3%     40.6%   0.813       5,029
+
+2. DOES THE REGIME RESULT SURVIVE?  (ten forecasters common to every arm)
+   ARM                         pooled   stockout-dom   holding-dom      tau
+   published      S / H=4      -0.309         -0.285        +0.455   +0.405
+   mid-cycle    mid / H=4      -0.309         -0.358        +0.455   +0.337
+   at reorder     s / H=4      -0.309         -0.236        +0.455   +0.333
+   empty       zero / H=4      -0.455         -0.273        +0.418   +0.435
+   train12        S / H=4      +0.685         -0.212        -0.103   +0.411
+   train12      mid / H=4      +0.600         -0.418        -0.103   +0.347
+   published      S / H=8      +0.345         +0.091        +1.000   +0.403
+   mid-cycle    mid / H=8      +0.273         +0.055        +1.000   +0.345
+   empty       zero / H=8      +0.127         -0.055        +0.927   +0.396
+
+3. WHICH MODEL WINS
+   ARM                        most accurate      cheapest
+   published      S / H=4                MA           TSB
+   mid-cycle    mid / H=4                MA           TSB
+   at reorder     s / H=4                MA           TSB
+   empty       zero / H=4                MA           TSB
+   train12        S / H=4               SES         ADIDA
+   train12      mid / H=4               SES         ADIDA
+   published      S / H=8               SES         ADIDA
+   mid-cycle    mid / H=8               SES            MA
+   empty       zero / H=8               SES            MA
+
+4. READING
+   Published arm: 18.2 % of SKUs place an order and cost is 90.5 % holding.
+   If the regime correlations in section 2 hold up in the arms where the
+   policy reorders and stockout cost carries real weight, the finding is a
+   property of the accuracy metric and not of an unexercised policy.
