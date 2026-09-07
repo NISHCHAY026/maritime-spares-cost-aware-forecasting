@@ -16,7 +16,7 @@ changing sign across nine defensible evaluation designs while per-SKU
 statistics barely move. Scoring the critical
 fractile inherits the confound; scoring the fractile the replenishment decision
 reads escapes it. On M5 the zero-median condition holds for
-10.1 % of series, reconciling the conflicting evidence.
+10.1 % of series, helping reconcile the conflicting evidence.
 
 **Keywords.** intermittent demand; spare-parts inventory; cost-aware forecast
 evaluation; cost regime; foundation models; maritime operations.
@@ -47,7 +47,8 @@ This paper connects the two observations and pushes the conclusion further
 than either. We work on the spare-parts operation of a multi-brand cruise
 group, three brands and 40 vessels, around 220k SKUs with quarterly history,
 with the (s, S) parameters the operator actually runs as a baseline. On this
-data the regime pattern is not a fact about forecast quality at all. It is
+data, under policies that read the forecast through its mean, the regime
+pattern is not a fact about forecast quality at all. It is
 what the metric-level confound looks like after it passes through a cost
 function; its boundary is derivable from the cost parameters alone; it
 reproduces in full on six copies of one forecaster that differ only by a scale
@@ -64,13 +65,16 @@ evaluation-design choices that studies in this literature rarely report.
   with 78.6 % of SKUs at exactly +1, and six scaled copies of one forecaster,
   which contain identical information about demand, reproduce the full regime
   pattern at +1.000 where holding cost dominates.
-* **The regime boundary has an exact derivation.** The cost-minimising
+* **The regime boundary has a single-period derivation.** The cost-minimising
   forecast is the quantile at the newsvendor critical fractile
   q* = Cu/(Cu+Co), which crosses the 0.5 fractile MAE targets at a derivable
-  unit price, \$1,600 here, and that is the empirically observed crossover.
-  The boundary Theodorou et al. (2025) describe is therefore the confound's
-  fingerprint: real, predictable from the cost parameters, and not evidence
-  that better forecasts cost less.
+  unit price, \$1,600 here, and the sign of the accuracy-cost correlation
+  differs across that price as predicted.
+  Where the zero-median condition binds, the regime pattern is therefore the
+  confound's fingerprint: real, predictable from the cost parameters, and not
+  evidence that better forecasts cost less. On M5 the condition binds for one
+  series in ten, so the boundary Theodorou et al. (2025) report cannot be
+  wholly this identity at work.
 * **The fleet-level statistic is fragile as an instrument.** The correlation
   between method-mean accuracy and method-mean cost rests on eleven points.
   Across nine defensible evaluation designs it runs from -0.103 to +1.000 in
@@ -84,7 +88,8 @@ evaluation-design choices that studies in this literature rarely report.
   Under a policy that consumes the whole predictive distribution the confound
   is escapable, but only by scoring at the fractile the decision reads:
   pinball at the service level predicts cost better than MAE (median +0.800
-  against +0.632) while a generic five-quantile CRPS does worse (+0.400).
+  against +0.632) while a generic five-quantile CRPS does worse (+0.400). This
+  comparison rests on the four models that emit quantiles.
 * **The severity is measurable in advance.** On the public M5 data the
   level-MAE statistic has median +0.194 because the analytic condition holds
   for only 10.1 % of M5 series against 77.3 % here; conditioning on it, the
@@ -96,7 +101,7 @@ evaluation-design choices that studies in this literature rarely report.
   Chronos-T5 model is the most accurate and the cheapest point estimate of
   eleven forecasters, though separable from almost none of them. Ten of eleven
   model-driven policies beat the operator's deployed parameterisation, with a
-  bootstrap interval on the gap of [-60.4 %, -41.0 %]. And deliberately
+  bootstrap interval on the gap of [-60.2 %, -41.0 %]. And deliberately
   scoring against right-censored quarters does not reorder the forecasters.
 
 Section 2 places the work; Section 3 covers data; Section 4 methods; Section 5
@@ -117,7 +122,11 @@ forecast, so Hyndman & Koehler (2006) standardised the scaled error (MASE).
 
 **Accuracy versus inventory performance.** Syntetos & Boylan (2006) showed
 empirically that accuracy and stock-control rankings can diverge; Teunter et
-al. (2010) and Prak & Teunter (2019) developed the gap analytically. On the
+al. (2010) and Prak & Teunter (2019) developed the gap analytically; Teunter &
+Duncan (2009) showed the accuracy ranking of intermittent-demand methods
+depends on the error measure chosen, and Syntetos, Nikolopoulos & Boylan
+(2010) proposed judging forecasts by accuracy-implication metrics rather than
+accuracy itself. On the
 metric side, Wallström & Segerstedt (2010) found that error measures for
 intermittent series disagree with each other and with stock-control outcomes,
 Kolassa (2016) argued point-error metrics are the wrong target for count data,
@@ -162,7 +171,7 @@ Dates, quantities, prices, lead times, the demand-pattern segmentation, ABC
 class and criticality are preserved.
 
 The analysis runs on a **stratified sample of 15,348 SKUs** drawn from the
-219,789-SKU forecast panel by equal allocation across demand-pattern and ABC
+219,783-SKU forecast panel by equal allocation across demand-pattern and ABC
 cells, with a per-cell cap of 1,579. Equal allocation buys precision in the
 small, high-value cells that a proportional sample would barely reach, and it
 is the right design for a paired model comparison. It is the wrong design for
@@ -231,11 +240,11 @@ each one is consequential on a four-quarter window.
 * **Unmet demand is lost, not backordered.** A stockout is charged once per
   unit short and the shortfall does not carry into the next quarter.
 * **Inventory starts saturated** at on-hand = S. On this window that is not a
-  neutral choice: 83.0 % of SKUs never place an order in the four test
+  neutral choice: 81.8 % of SKUs never place an order in the four test
   quarters, so for most of the sample the simulation measures the cost of
   holding an initial position rather than the cost of replenishing. Starting
   from zero instead raises mean cost by about 5 % but drops mean fill from
-  0.965 to 0.828, so the start condition matters far more for service than for
+  0.965 to 0.830, so the start condition matters far more for service than for
   cost. The specification grid of Section 5.4 re-runs the whole comparison from
   four opening positions and three windows, so this choice is tested rather
   than assumed.
@@ -277,8 +286,10 @@ different questions. The **within-SKU** statistic is the mean per-SKU Kendall's
 τ between MAE-rank and cost-rank across the eleven forecasters, with SKU-level
 bootstrap CIs. The **fleet-level** statistic is the Spearman correlation
 between each forecaster's mean MAE and its mean cost, across the eleven
-forecasters. The second is what a practitioner implicitly uses when choosing
-one model for the whole fleet.
+forecasters. ZIP and HNB share a point forecast (Section 5.1), so the eleven
+forecasters contribute ten distinct points to this correlation; we keep both
+and let the tie stand. The second statistic is what a practitioner implicitly
+uses when choosing one model for the whole fleet.
 
 **Cost regime.** Under the default configuration, per-unit-quarter holding cost
 is (0.25/4)·price and the stockout penalty is a flat \$100, so the two are equal
@@ -320,10 +331,10 @@ noting it in passing. Simulated cost is extremely right-skewed: 3.2 % of SKUs
 carry 82.3 % of it. Those are not an independently identified tail; they are
 the holding-dominated group of Section 5.4, since the same unit-price threshold
 defines both. A paired bootstrap over SKUs (B = 20,000) gives Chronos a
-mean of \$2,097 with a 95 % interval of [\$543, \$5,050]. On the paired
+mean of \$2,097 with a 95 % interval of [\$545, \$5,089]. On the paired
 difference against the cheapest model, **only one of ten models is
-distinguishable**: LightGBM, at +\$839 [+219, +1,806]. Chronos against
-Hurdle-NB is +\$457 [-231, +1,605]. So Chronos is the cheapest *point estimate*
+distinguishable**: LightGBM, at +\$839 [+212, +1,834]. Chronos against
+Hurdle-NB is +\$457 [-232, +1,611]. So Chronos is the cheapest *point estimate*
 but is not statistically separable from nine of the other ten, and no claim in
 this paper rests on the cost ordering of adjacent models.
 
@@ -453,7 +464,10 @@ and Co is (0.25/4) x price per quarter, so
     q*(price) = 100 / (100 + 0.0625 x price),
 
 which equals 0.5 at exactly **price = \$1,600**: the crossover used in the
-table above, derived rather than observed. MAE implicitly targets the 0.5
+table above, derived rather than observed. The derivation is single-period and
+myopic. With a saturated start most units are held for several quarters, which
+pushes the true break-even price below \$1,600, so we use \$1,600 as the
+definition of the split rather than as an estimate of the optimum. MAE implicitly targets the 0.5
 fractile for every SKU regardless of price, so it is aligned with the cost
 structure at exactly one price and misaligned on both sides, which is why the
 correlation reverses sign instead of merely weakening. The misalignment is
@@ -543,6 +557,10 @@ The ordering is the useful result, and it is not "distributional beats point".
 A generic distributional score is *worse* than MAE, because CRPS averages over
 the whole quantile grid including the median region the decision never reads.
 What wins is the loss evaluated at the specific fractile the policy consumes.
+This is Gneiting's (2011) consistency principle observed inside a deployed
+policy chain: a scoring function should be consistent for the functional the
+decision reads, and the failure of an unweighted CRPS here is the case for
+quantile-weighted scoring made by Gneiting & Ranjan (2011).
 Only four models emit quantiles, so the fleet-level version of this comparison
 rests on four points and we do not interpret it.
 
@@ -557,8 +575,7 @@ expected (Smooth +0.157, Erratic +0.229, Intermittent +0.253, Lumpy +0.301) but
 none is close to the maritime result.
 
 The analytic condition explains the gap. Median demand is zero over the
-out-of-sample window for **10.1 %** of M5 series against **77.3 %** here; at a
-matched four-period horizon M5 is still only 5.2 %. So the difference is how
+out-of-sample window for **10.1 %** of M5 series against **77.3 %** here. So the difference is how
 zero-dense the evaluation window is, not the horizon length and not the
 Syntetos-Boylan class label. Conditioning on the analytic condition, the
 mechanism does reappear on M5: the median rank correlation is **+0.614** on the
@@ -608,7 +625,7 @@ a whole.
 
 The direction is robust and now has an interval: a paired bootstrap over the
 overlap SKUs puts the gap at -50.7 % with a 95 % interval of
-**[-60.4 %, -41.0 %]**, comfortably excluding zero. The cheapest model in each
+**[-60.2 %, -41.0 %]**, comfortably excluding zero. The cheapest model in each
 cell beats deployed in 80 of 80 cost-configuration cells and in all four service-level scenarios, by
 49 % to 53 %. Which model is cheapest is configuration-dependent (IMAPA wins 31
 cells, Chronos 23, HNB 13, ZIP 9, ADIDA and SBA 2 each), so there is no single
@@ -635,8 +652,8 @@ fixed, and moving only the test window into the incomplete region (quarters 25
 to 28), the demand-active fraction falls from 38.6 % to 11.4 %, confirming the
 censoring is real and severe. The cost ranking does not move: the ordering of
 all ten models is identical across the two windows, the moving average is
-ninth of ten in both, and the within-SKU τ is unchanged (+0.404 clean against
-+0.419 censored, overlapping intervals).
+ninth of ten in both, and the within-SKU τ is unchanged (+0.405 clean against
++0.426 censored, overlapping intervals).
 
 A ranking change does appear if one compares the clean window against the
 original naive split (train quarters 1 to 20, test 21 to 28), where the moving
@@ -701,16 +718,18 @@ The regime contrast sharpens rather than dissolving, which is convenient enough
 that it deserves scrutiny. A weighted correlation can be one heavy stratum
 wearing a large weight, so we decomposed it. The holding-dominated result is
 robust: it is positive within every major stratum (+0.845, +0.864, +0.809,
-+0.864 for the four largest by weight) and leave-one-stratum-out never takes it
-below +0.973. The stockout-dominated result is not. It falls from -0.882 to
++0.864 for the four largest by weight); removing any of the four largest
+strata leaves it above +0.97, and the full leave-one-stratum-out minimum is
++0.69, at a stratum carrying 0.5 % of the weight. The stockout-dominated
+result is not robust in this way. It falls from -0.882 to
 -0.182 when the Intermittent x C cell is removed, and the within-stratum values
 have no consistent sign, running from -0.709 to +0.936. That cell is 68 % of
 the fleet by weight, so -0.882 is a true statement about this population and a
 statement about one stratum at the same time.
 
 So the contrast survives both checks and the magnitude of its negative half
-does not. Accuracy predicts cost where holding cost dominates, in the sample and
-in the population alike. Where stockouts dominate it does not, and how negative
+does not. The correlation is positive where holding cost dominates, in the
+sample and in the population alike; Section 5.3 says what it is made of. Where stockouts dominate it does not, and how negative
 the relationship looks depends on the stratum. Kish's effective sample size
 under these weights is 3,127 overall and
 162 in the holding-dominated group, so the weighted intervals are wide by
@@ -755,8 +774,8 @@ interval on a fixed design is not the uncertainty that matters here.
 Fourth, the critical fractile. q* = Cu/(Cu+Co) locates the regime boundary
 analytically, at \$1,600 here with a median q* of 0.981, and where a
 distributional forecast is available it should be scored at the fractile the
-policy reads, not with a generic proper score, which we find performs worse
-than MAE.
+policy reads, not with a generic proper score, which we find performs worse than MAE
+in a four-model comparison.
 
 None of this says accuracy is worthless. The within-SKU τ of +0.387 among
 demand-active SKUs is stable across all nine evaluation designs and consistent
@@ -791,7 +810,7 @@ alternatives by far more than the forecasters separate from each other.
 6. **Lost-sales rather than backorder dynamics**, which suits consumable
    spares but not repairable or critical items where demand genuinely queues.
 7. **The window is the exposure, not the opening position.** With on-hand
-   initialised at S, 83.0 % of SKUs never reorder within the four test
+   initialised at S, 81.8 % of SKUs never reorder within the four test
    quarters. The specification grid of Section 5.4 tests this directly:
    opening positions from saturated to empty move the holding-dominated
    correlation by less than 0.04, while the choice of evaluation window moves
@@ -819,9 +838,10 @@ alternatives by far more than the forecasters separate from each other.
     LightGBM and Chronos emit quantiles, so the fleet-level version of Section
     5.5's metric comparison has four points and is not interpreted; the per-SKU
     rank correlations over four models can also take only a few discrete values.
-15. **The M5 comparison is a metric test, not a cost test.** We reuse published
-    per-series accuracy and bias from the M5 classical benchmark and recover
-    forecast level from bias; we do not run an inventory simulation on M5, so
+15. **The M5 comparison is a metric test, not a cost test.** We reuse
+    per-series accuracy and bias for eight classical methods computed in a
+    companion study on the public M5 data, and recover forecast level from
+    bias; we do not run an inventory simulation on M5, so
     Section 5.6 establishes the confound's prevalence there but not its cost
     consequences.
 
@@ -831,23 +851,25 @@ alternatives by far more than the forecasters separate from each other.
 
 On 15,348 SKUs of real maritime spare-parts data, the statistic this
 literature uses to ask whether forecast accuracy predicts inventory cost turns
-out to measure forecast level. MAE is minimised at the median of realised
+out, under policies that read the forecast through its mean, to measure
+forecast level. MAE is minimised at the median of realised
 demand, which is zero for 77.3 % of these SKUs, so MAE-rank is level-rank by
 identity, with per-SKU rank correlation median +1.000; six scaled copies of
 one forecaster, containing identical information about demand, reproduce the
 full regime pattern at +1.000 where holding cost dominates. The boundary
 between regimes is the newsvendor critical fractile crossing the median, at a
-derivable unit price of \$1,600, exactly where the empirical crossover sits.
+derivable unit price of \$1,600, with the correlation's sign differing across
+that price as predicted.
 The instrument is fragile besides: across nine defensible evaluation designs
 the holding-dominated correlation runs from -0.103 to +1.000, while the
 per-SKU τ stays between +0.333 and +0.435. Scoring at q* inherits the confound
 with the sign reversed; what works is scoring the fractile the replenishment
 decision reads, under a policy that consumes the predictive distribution. On
 public M5 data the zero-median condition holds for 10.1 % of series against
-77.3 % here, which reconciles why competition-data and spare-parts studies
+77.3 % here, which helps reconcile why competition-data and spare-parts studies
 disagree about whether accuracy matters. Three secondary results: ten of
 eleven model-driven policies beat the deployed parameterisation, direction
-bounded away from zero ([-60.4 %, -41.0 %]); a zero-shot foundation model is
+bounded away from zero ([-60.2 %, -41.0 %]); a zero-shot foundation model is
 the most accurate and cheapest point estimate but separable from almost none
 of its competitors; and censoring of the most recent quarters, though real and
 severe, does not reorder forecasters. The design checks of Section 5.10,
@@ -926,10 +948,12 @@ mode for a cost-aware forecasting study.
     instead (Section 5.4) moves the same statistic from -0.103 to +1.000, so
     the interval is the smaller of the two uncertainties.
 
-One discrepancy remains unresolved: the Hurdle-NB fill-matched delta is +2.1 %
-in the main analysis script and -0.5 % in the robustness script, on the same
-window and nominal configuration. We report the main-script value and flag the
-inconsistency rather than choosing silently.
+One earlier discrepancy is now resolved. A previous draft reported the
+Hurdle-NB fill-matched delta as +2.1 % in one script and -0.5 % in another, on
+the same window and configuration, and flagged the inconsistency rather than
+choosing. The non-determinism fixes of item 3 were the cause: after the
+canonical-ordering re-run the two scripts agree at +1.5 %, the value in
+Section 5.7's table.
 
 ---
 
@@ -946,8 +970,15 @@ series: a clustering approach. *Expert Systems with Applications*, 140,
 Croston, J. D. (1972). Forecasting and stock control for intermittent
 demands. *Operational Research Quarterly*, 23(3), 289-303.
 
+Gneiting, T. (2011). Making and evaluating point forecasts. *Journal of the
+American Statistical Association*, 106(494), 746-762.
+
 Gneiting, T., Balabdaoui, F., & Raftery, A. E. (2007). Probabilistic
 forecasts, calibration and sharpness. *JRSS B*, 69(2), 243-268.
+
+Gneiting, T., & Ranjan, R. (2011). Comparing density forecasts using
+threshold- and quantile-weighted scoring rules. *Journal of Business &
+Economic Statistics*, 29(3), 411-422.
 
 Hyndman, R. J., & Koehler, A. B. (2006). Another look at measures of
 forecast accuracy. *International Journal of Forecasting*, 22(4), 679-688.
@@ -999,9 +1030,17 @@ Syntetos, A. A., & Boylan, J. E. (2006). On the stock control performance
 of intermittent demand estimators. *International Journal of Production
 Economics*, 103(1), 36-47.
 
+Syntetos, A. A., Nikolopoulos, K., & Boylan, J. E. (2010). Judging the judges
+through accuracy-implication metrics: The case of inventory forecasting.
+*International Journal of Forecasting*, 26(1), 134-143.
+
 Teunter, R. H., Babai, M. Z., & Syntetos, A. A. (2010). ABC
 classification: service levels and inventory costs. *Production and
 Operations Management*, 19(3), 343-352.
+
+Teunter, R. H., & Duncan, L. (2009). Forecasting intermittent demand: a
+comparative study. *Journal of the Operational Research Society*, 60(3),
+321-329.
 
 Teunter, R. H., Syntetos, A. A., & Babai, M. Z. (2011). Intermittent
 demand: linking forecasting to inventory obsolescence. *European Journal

@@ -35,6 +35,7 @@ def load(name):
 def norm(s: str) -> str:
     """Fold LaTeX/markdown number formatting so one rule matches both files."""
     s = s.replace("{,}", ",").replace("\$", "$").replace("\%", "%")
+    s = s.replace("\&", "&")
     s = s.replace("\u2212", "-").replace("\u2013", "-").replace("\u2014", "-")
     s = re.sub(r"\s+", " ", s)
     return s
@@ -124,8 +125,9 @@ def main():
     add("lost sales disclosed", ["lost, not backordered"],
         ["backorders allowed", "backorders with a per-unit-per-quarter"],
         "simulator.py discards `short`; it has never modelled backorders")
-    add("saturated start disclosed", ["starts saturated", "83.0 %"], [],
-        "initial_on_hand defaults to S; 83% of SKUs never reorder in 4 quarters")
+    add("saturated start disclosed", ["starts saturated", "81.8 %"], ["83.0 %"],
+        "81.8% never order under the current pipeline (simulator_exercise "
+        "order_share 18.2%); 83.0 was a stale pre-fix figure")
     add("definitional fill disclosed", ["1.0 by definition", "61.4 %"], [],
         "simulate() sets fill_rate=1.0 when total demand is zero")
     add("cost composition disclosed", ["90.5 %"], [],
@@ -187,8 +189,9 @@ def main():
             "holding-dominated rho CI [+0.49, +1.00] excludes zero at B=20,000")
         add("stockout regime not claimed negative", ["-0.76"], [],
             "stockout-dominated CI includes zero; no negative relationship claimed")
-        add("deployed gap CI reported", ["-60.4"], [],
-            "deployed gap -50.7% CI [-60.4%, -41.0%]")
+        add("deployed gap CI reported", ["-60.2"], ["-60.4"],
+            "deployed gap CI is [-60.2%, -41.0%] at B=20,000; -60.4 was the "
+            "stale B=2,000 endpoint the audit caught this verifier enforcing")
 
     # --- equal information sets (roadmap item 4) ---------------------------
     inf_set = load("information_set.json")
@@ -251,6 +254,41 @@ def main():
             ["The boundary is visible:",
              "prediction, reproduced on independent operational"],
             "the replication framing must not survive as a claim about forecast quality")
+
+    # --- referee-panel corrections (2026-09) --------------------------------
+    add("deployed per-model artifact", ["1,543"], [],
+        "5.8's per-model overlap figures now have a ledger "
+        "(clean_full.deployed.overlap_per_model)")
+    add("HNB discrepancy resolved", ["scripts agree at", "+1.5"], [],
+        "both scripts now give +1.5% after the canonical-ordering fix; the "
+        "'unresolved' note was stale")
+    add("panel N corrected", ["219,783"], ["219,789"],
+        "unique SKU-forecast pairs; 219,789 was the raw row count")
+    add("M5 matched-horizon removed", [], ["matched four-period horizon"],
+        "the 5.2% figure had no artifact and was deleted")
+    add("LOSO honest", ["+0.69"], ["never takes it below"],
+        "full leave-one-stratum-out minimum is +0.691 (0.5%-weight stratum); "
+        "'never below +0.973' was false")
+    add("cost CI current", ["5,089"], ["5,050"],
+        "5.2 cost CIs requoted from the B=20,000 ledger")
+    add("censored tau current", ["+0.426"], ["+0.419"],
+        "censored-window taus from the canonical-ordering ledger")
+    ssw = load("bootstrap_seed_sweep.json")
+    if ssw:
+        add("seed sweep artifact",
+            [f'{ssw["B2000"]["lo_min"]:+.3f}', f'{ssw["B20000"]["lo_min"]:+.3f}'],
+            [], "the seed-sweep ranges the paper quotes now have a ledger")
+    add("elicitability attributed",
+        ["Gneiting & Ranjan (2011)", "Teunter & Duncan (2009)",
+         "Syntetos, Nikolopoulos"], [],
+        "the consistent-scoring lineage and closest precursors are cited")
+    add("derivation labelled single-period", ["single-period"],
+        ["exact derivation", "empirically observed crossover",
+         "exactly where the empirical crossover sits"],
+        "the newsvendor derivation is a single-period myopic approximation")
+    add("quality-reading relapse fixed", [],
+        ["Accuracy predicts cost where holding cost dominates, in the sample"],
+        "5.10 must not re-read the confounded correlation as forecast quality")
 
     # --- run --------------------------------------------------------------
     # The reproducibility note deliberately quotes superseded values ("moved

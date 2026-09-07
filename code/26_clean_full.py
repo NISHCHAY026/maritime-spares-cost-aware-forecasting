@@ -206,7 +206,11 @@ def main():
                         "delta_pct": matched[m][4]} for m in qmods},
         "deployed": {"cost": float(dep_c), "fill": float(dep_f), "n": int(len(idx)),
                      "best_model": best, "best_cost": float(ovc[best]),
-                     "gap_pct": float(100*(ovc[best]-dep_c)/dep_c)},
+                     "gap_pct": float(100*(ovc[best]-dep_c)/dep_c),
+                     # per-model overlap costs, so Section 5.8's per-model
+                     # figures have an artifact (referee audit, 2026-09)
+                     "overlap_per_model": {m: float(v) for m, v in ovc.items()},
+                     "n_models_beating_deployed": int(sum(v < dep_c for v in ovc.values()))},
     }
     (ROB_DIR / f"clean_full{SUF}.json").write_text(json.dumps(js, indent=2), encoding="utf-8")
     print(rep)
