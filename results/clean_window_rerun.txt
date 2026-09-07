@@ -1,0 +1,32 @@
+CLEAN-WINDOW RE-RUN (train QTR01-16, test QTR17-20)  vs  contaminated (train Q1-20, test Q21-28)
+==========================================================================================
+N=15,348   test demand-active: 38.6% (contaminated 34.0%)
+
+FINDING 1 — per-SKU Kendall tau (MAE-rank vs cost-rank):
+  demand-active : clean tau=+0.432 CI[+0.416,+0.449] N=5,667   |  contaminated +0.49 [+0.47,+0.50]
+  zero-demand   : clean tau=+0.999 CI[+0.999,+0.999] N=9,419   |  contaminated +0.86
+  pooled        : clean tau=+0.786 CI[+0.778,+0.794]          |  contaminated +0.73
+
+FINDING 2 — predictive-quantile calibration (coverage; target shown):
+  MODEL        Q50→.50   Q90→.90   Q95→.95   Q99→.99
+  ZIP            0.828     0.931     0.951     0.963
+  HURDLE_NB      0.827     0.930     0.952     0.973
+  LGBM           0.874     0.927     0.935     0.940
+  (contaminated Q99 coverage was 0.965-0.988; target 0.99)
+
+FINDING 3 — deployed vs best model on overlap (n=1,579):
+  deployed   mean cost $    1,151   fill 0.864
+  best model (HURDLE_NB) $      567   gap -50.7%   (contaminated gap -37%, deployed fill 0.85)
+
+Per-model clean-window MAE / cost / fill:
+  MODEL        meanMAE   meanCost    fill
+  HURDLE_NB      8.595      2,554   0.965
+  ZIP            8.595      2,555   0.966
+  TSB            8.633      2,564   0.965
+  SBA            8.948      2,581   0.965
+  CROSTON        9.107      2,585   0.965
+  IMAPA          8.201      2,607   0.965
+  LGBM           8.746      2,638   0.993
+  SES            7.889      2,657   0.965
+  ADIDA          8.311      2,691   0.963
+  MA             7.598      2,879   0.956

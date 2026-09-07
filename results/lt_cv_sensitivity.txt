@@ -1,0 +1,20 @@
+R5 — Lead-time CV sensitivity
+============================================================
+  CV(LT)=0.1  best_cost=MA         best_acc=CHRONOS    rho=+0.636 (p=0.035)  mean_cost_best=$3,843
+  CV(LT)=0.3  best_cost=MA         best_acc=CHRONOS    rho=+0.636 (p=0.035)  mean_cost_best=$3,848
+  CV(LT)=0.5  best_cost=MA         best_acc=CHRONOS    rho=+0.636 (p=0.035)  mean_cost_best=$3,855
+
+Per-model mean total cost by CV(LT):
+            0.1   0.3   0.5
+MODEL                      
+MA         3843  3848  3855
+CHRONOS    3894  3897  3902
+LGBM       4072  4085  4108
+SES        4416  4419  4426
+IMAPA      4501  4504  4511
+ADIDA      4550  4553  4559
+HURDLE_NB  4778  4780  4787
+ZIP        4779  4782  4789
+TSB        4786  4790  4797
+SBA        4818  4822  4831
+CROSTON    4831  4836  4847

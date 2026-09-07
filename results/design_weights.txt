@@ -1,0 +1,85 @@
+DESIGN WEIGHTS: SAMPLE ESTIMATES vs POPULATION ESTIMATES
+==============================================================================
+
+The sample is equal-allocation stratified on SEGMENTATION_GRP x ABC_GRP.
+Population (panel) N = 219,783; sample n = 15,348.
+Design weights w_h = N_h / n_h run from 1.00 to 96.12, so the raw mean is not a fleet mean.
+Kish effective sample size = 3,127 (20.4 % of n): weighting buys
+unbiasedness for the population and pays for it in precision.
+
+1. STRATUM WEIGHTS
+   SEGMENT       ABC            N_h     n_h     w_h   sampled
+   Erratic       A              208     208    1.00  100.00%
+   Erratic       B                5       5    1.00  100.00%
+   Erratic       Unknown          8       8    1.00  100.00%
+   Intermittent  A            2,738   1,579    1.73   57.67%
+   Intermittent  B            3,868   1,579    2.45   40.82%
+   Intermittent  C          151,780   1,579   96.12    1.04%
+   Intermittent  Unknown     12,832   1,579    8.13   12.31%
+   Lumpy         A            1,653   1,579    1.05   95.52%
+   Lumpy         B              962     962    1.00  100.00%
+   Lumpy         C            7,238   1,579    4.58   21.82%
+   Lumpy         Unknown      1,142   1,142    1.00  100.00%
+   Smooth        A              259     259    1.00  100.00%
+   Smooth        B               12      12    1.00  100.00%
+   Smooth        C                2       2    1.00  100.00%
+   Smooth        Unknown         14      14    1.00  100.00%
+   Unknown       A                1       1    1.00  100.00%
+   Unknown       B              103     103    1.00  100.00%
+   Unknown       C           33,071   1,579   20.94    4.77%
+   Unknown       Unknown      3,887   1,579    2.46   40.62%
+
+2. PER-MODEL MEANS
+   MODEL        MAE samp   MAE pop     d %    cost samp  cost pop     d %
+   SBA             8.948     1.702   -81.0        2,581       456   -82.3
+   SES             7.889     1.487   -81.2        2,657       463   -82.6
+   MA              7.598     1.438   -81.1        2,879       485   -83.1
+   CROSTON         9.107     1.723   -81.1        2,585       457   -82.3
+   TSB             8.633     1.656   -80.8        2,564       454   -82.3
+   ADIDA           8.311     1.642   -80.2        2,691       467   -82.7
+   IMAPA           8.201     1.631   -80.1        2,607       460   -82.4
+   ZIP             8.595     1.651   -80.8        2,555       455   -82.2
+   HURDLE_NB       8.595     1.651   -80.8        2,554       453   -82.3
+   LGBM            8.775     2.031   -76.9        2,936       838   -71.5
+   CHRONOS         6.525     1.337   -79.5        2,097       434   -79.3
+
+   cheapest, sample : CHRONOS, HURDLE_NB, ZIP, TSB, SBA, CROSTON, IMAPA, SES, ADIDA, MA, LGBM
+   cheapest, popn   : CHRONOS, HURDLE_NB, TSB, ZIP, SBA, CROSTON, IMAPA, SES, ADIDA, MA, LGBM
+
+3. COST REGIME
+   GROUP                   rho samp   rho pop         95 % CI (pop)  P(rho<=0)
+   all SKUs                  +0.018    +0.109      [-0.337, +0.536]     0.2295
+     sample n / popn est     15,348   219,783   Kish n_eff 3,127
+   stockout-dominated        -0.345    -0.882      [-0.891, -0.018]     0.9795
+     sample n / popn est     14,861   206,576   Kish n_eff 2,969
+   holding-dominated         +0.591    +0.991      [+0.282, +1.000]     0.0000
+     sample n / popn est        487    13,207   Kish n_eff 162
+
+   Is the weighted figure a fleet fact or one heavy stratum?
+   Leave-one-stratum-out on the weighted rho, largest strata first:
+   stockout-dominated (full -0.882):
+      Intermittent x C          68.2% of weight, within -0.709, without -0.182
+      Unknown x C               15.4% of weight, within +0.255, without -0.882
+      Intermittent x Unknown     6.0% of weight, within +0.091, without -0.900
+      Lumpy x C                  3.5% of weight, within -0.064, without -0.791
+   holding-dominated (full +0.991):
+      Intermittent x C          82.2% of weight, within +0.845, without +0.982
+      Unknown x C                9.8% of weight, within +0.864, without +0.991
+      Intermittent x Unknown     3.9% of weight, within +0.809, without +0.991
+      Intermittent x B           1.5% of weight, within +0.864, without +0.973
+
+4. SHARES THE PAPER STATES AS FLEET FACTS
+   QUANTITY                                sample   population
+   holding-dominated SKU share               3.2%         6.0%
+   demand-active SKU share                  38.6%        14.8%
+   cost share in holding-dominated          82.3%        62.1%
+   mean tau (demand-active)                +0.387       +0.436
+   mean tau (pooled)                       +0.778       +0.924
+
+5. DEPLOYED GAP on the 1,579-SKU overlap
+   sample     -50.7 %  (cheapest HURDLE_NB)
+   population -52.1 %  (cheapest IMAPA)
+   weights on the overlap span 1.00 to 96.12.
+   Caveat: deployed-policy coverage is not itself a random subset of
+   the panel, so this estimates the population of panel SKUs that HAVE
+   a deployed policy, not the fleet.

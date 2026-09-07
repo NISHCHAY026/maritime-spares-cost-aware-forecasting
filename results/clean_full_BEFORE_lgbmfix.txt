@@ -1,0 +1,31 @@
+CLEAN-WINDOW FULL (train QTR01-16, test QTR17-20, 11 models)
+======================================================================
+N=15,348  demand-active=38.6%  chronos=yes
+
+FINDING 1 — per-SKU Kendall tau:
+  demand-active +0.392 [+0.374,+0.409] N=5,321
+  zero-demand   +0.999 [+0.999,+0.999] N=9,419
+  pooled        +0.780 [+0.772,+0.787]
+
+FINDING 2 — calibration (coverage) + fill-matched native cost delta:
+  MODEL         Q90    Q95    Q99  | kappa  capped  matched-cost-delta
+  ZIP         0.931  0.951  0.963  |  0.87  False  -15.4%
+  HURDLE_NB   0.930  0.952  0.972  |  0.90  False  +0.5%
+  LGBM        0.927  0.934  0.941  |  8.00  True   +204.4%
+  CHRONOS     0.892  0.912  0.939  |  8.00  True   +66.5%
+
+FINDING 3 — deployed vs best (HURDLE_NB) on overlap n=1,579:
+  deployed $1,151 fill 0.864   best $567  gap -50.7%
+
+Per-model clean MAE / cost / fill (sorted by cost):
+  CHRONOS    MAE   6.554  cost     2,109  fill 0.965
+  HURDLE_NB  MAE   8.595  cost     2,554  fill 0.965
+  ZIP        MAE   8.595  cost     2,555  fill 0.966
+  TSB        MAE   8.633  cost     2,564  fill 0.965
+  SBA        MAE   8.948  cost     2,581  fill 0.965
+  CROSTON    MAE   9.107  cost     2,585  fill 0.965
+  IMAPA      MAE   8.201  cost     2,607  fill 0.965
+  SES        MAE   7.889  cost     2,657  fill 0.965
+  ADIDA      MAE   8.311  cost     2,691  fill 0.963
+  LGBM       MAE   8.526  cost     2,784  fill 0.982
+  MA         MAE   7.598  cost     2,879  fill 0.956

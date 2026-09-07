@@ -1,0 +1,7 @@
+R2 — per-segment Spearman rho(acc_rank, cost_rank)
+     segment  n_skus  n_models      rho        p
+     Erratic     221        11 0.209091 0.537221
+Intermittent    6316        11 0.909091 0.000106
+       Lumpy    5262        11 0.909091 0.000106
+      Smooth     287        11 0.081818 0.810990
+     Unknown    3262        11 0.427273 0.189944

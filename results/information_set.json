@@ -1,0 +1,225 @@
+{
+  "crossover_price_usd": 1600.0,
+  "B": 2000,
+  "seed": 42,
+  "affected_models": [
+    "SBA",
+    "CROSTON",
+    "TSB"
+  ],
+  "unchanged_models": [
+    "SES",
+    "MA",
+    "ADIDA",
+    "IMAPA",
+    "ZIP",
+    "HURDLE_NB",
+    "LGBM",
+    "CHRONOS"
+  ],
+  "share_demand_in_final_quarter": 0.19657284336721398,
+  "forecast_shift": {
+    "SBA": {
+      "share_moved": 0.19657284336721398,
+      "mean_abs_shift": 0.2218393992441564,
+      "mean_signed_shift": 0.07732734006137429,
+      "mean_abs_shift_if_demand_fired": 1.1285353329795533
+    },
+    "CROSTON": {
+      "share_moved": 0.19657284336721398,
+      "mean_abs_shift": 0.2800186326758253,
+      "mean_signed_shift": 0.09718043017428005,
+      "mean_abs_shift_if_demand_fired": 1.4245031403077777
+    },
+    "TSB": {
+      "share_moved": 0.6411910346624967,
+      "mean_abs_shift": 0.569846642169959,
+      "mean_signed_shift": -0.0001554308584123302,
+      "mean_abs_shift_if_demand_fired": 1.774075103889481
+    }
+  },
+  "per_model": {
+    "SBA": {
+      "mae_base": 8.948102662129743,
+      "mae_equal": 8.916272457008787,
+      "cost_base": 2580.8000812382265,
+      "cost_equal": 2572.981275744226
+    },
+    "SES": {
+      "mae_base": 7.88936471297075,
+      "mae_equal": 7.88936471297075,
+      "cost_base": 2656.967207645876,
+      "cost_equal": 2656.967207645876
+    },
+    "MA": {
+      "mae_base": 7.598286095908262,
+      "mae_equal": 7.598286095908262,
+      "cost_base": 2879.3471644120636,
+      "cost_equal": 2879.3471644120636
+    },
+    "CROSTON": {
+      "mae_base": 9.106518074786875,
+      "mae_equal": 9.072492519920385,
+      "cost_base": 2584.8544030611406,
+      "cost_equal": 2576.7424090015206
+    },
+    "TSB": {
+      "mae_base": 8.633064793959248,
+      "mae_equal": 8.450226300887245,
+      "cost_base": 2564.1393044810407,
+      "cost_equal": 2549.901336480039
+    },
+    "ADIDA": {
+      "mae_base": 8.310711862846055,
+      "mae_equal": 8.310711862846055,
+      "cost_base": 2691.2446083688988,
+      "cost_equal": 2691.2446083688988
+    },
+    "IMAPA": {
+      "mae_base": 8.201074588106808,
+      "mae_equal": 8.201074588106808,
+      "cost_base": 2607.2049643220294,
+      "cost_equal": 2607.2049643220294
+    },
+    "ZIP": {
+      "mae_base": 8.595271625586395,
+      "mae_equal": 8.595271625586395,
+      "cost_base": 2555.1007183551574,
+      "cost_equal": 2555.1007183551574
+    },
+    "HURDLE_NB": {
+      "mae_base": 8.595271289418816,
+      "mae_equal": 8.595271289418816,
+      "cost_base": 2553.8618416565623,
+      "cost_equal": 2553.8618416565623
+    },
+    "LGBM": {
+      "mae_base": 8.77459109430147,
+      "mae_equal": 8.77459109430147,
+      "cost_base": 2935.6949857247714,
+      "cost_equal": 2935.6949857247714
+    },
+    "CHRONOS": {
+      "mae_base": 6.525292480792004,
+      "mae_equal": 6.525292480792004,
+      "cost_base": 2096.7746308153305,
+      "cost_equal": 2096.7746308153305
+    }
+  },
+  "regime": {
+    "base": {
+      "all": {
+        "n": 15348,
+        "rho": 0.018181818181818184,
+        "p": 0.9576852410216187,
+        "lo": -0.29090909090909095,
+        "hi": 0.7636363636363637,
+        "excludes_zero": false
+      },
+      "stockout_dominated": {
+        "n": 14861,
+        "rho": -0.3454545454545455,
+        "p": 0.2980892209030388,
+        "lo": -0.7545454545454545,
+        "hi": 0.45454545454545453,
+        "excludes_zero": false
+      },
+      "holding_dominated": {
+        "n": 487,
+        "rho": 0.5909090909090909,
+        "p": 0.05557560428877463,
+        "lo": 0.44545454545454555,
+        "hi": 1.0,
+        "excludes_zero": true
+      },
+      "tau_demand_active": 0.3872158232386706,
+      "tau_pooled": 0.7775305483825619
+    },
+    "equal_info": {
+      "all": {
+        "n": 15348,
+        "rho": 0.018181818181818184,
+        "p": 0.9576852410216187,
+        "lo": -0.29090909090909095,
+        "hi": 0.7090909090909092,
+        "excludes_zero": false
+      },
+      "stockout_dominated": {
+        "n": 14861,
+        "rho": -0.46363636363636374,
+        "p": 0.15090149929248603,
+        "lo": -0.8000000000000002,
+        "hi": 0.2545454545454546,
+        "excludes_zero": false
+      },
+      "holding_dominated": {
+        "n": 487,
+        "rho": 0.5909090909090909,
+        "p": 0.05557560428877463,
+        "lo": 0.45431818181818184,
+        "hi": 1.0,
+        "excludes_zero": true
+      },
+      "tau_demand_active": 0.3866205847499537,
+      "tau_pooled": 0.7773436015085707
+    }
+  },
+  "deployed": {
+    "gap_pct_base": -50.74642220214943,
+    "gap_pct_equal": -50.923669095451615,
+    "best_base": "HURDLE_NB",
+    "best_equal": "TSB"
+  },
+  "rank_cost_base": [
+    "CHRONOS",
+    "HURDLE_NB",
+    "ZIP",
+    "TSB",
+    "SBA",
+    "CROSTON",
+    "IMAPA",
+    "SES",
+    "ADIDA",
+    "MA",
+    "LGBM"
+  ],
+  "rank_cost_equal": [
+    "CHRONOS",
+    "TSB",
+    "HURDLE_NB",
+    "ZIP",
+    "SBA",
+    "CROSTON",
+    "IMAPA",
+    "SES",
+    "ADIDA",
+    "MA",
+    "LGBM"
+  ],
+  "rank_mae_base": [
+    "CHRONOS",
+    "MA",
+    "SES",
+    "IMAPA",
+    "ADIDA",
+    "HURDLE_NB",
+    "ZIP",
+    "TSB",
+    "LGBM",
+    "SBA",
+    "CROSTON"
+  ],
+  "rank_mae_equal": [
+    "CHRONOS",
+    "MA",
+    "SES",
+    "IMAPA",
+    "ADIDA",
+    "TSB",
+    "HURDLE_NB",
+    "ZIP",
+    "LGBM",
+    "SBA",
+    "CROSTON"
+  ]
+}

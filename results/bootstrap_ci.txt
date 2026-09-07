@@ -1,0 +1,4 @@
+R3 — bootstrap (n=200, seed=42, panel resampled with replacement)
+  rho mean   = +0.744
+  rho 95% CI = [+0.436, +0.964]
+  fraction of resamples with rho > 0 : 1.000

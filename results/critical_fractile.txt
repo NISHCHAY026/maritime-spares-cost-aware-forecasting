@@ -1,0 +1,25 @@
+PHASE 1 - CRITICAL FRACTILE: THE METRIC THE COST STRUCTURE IMPLIES
+==========================================================================
+
+  Cu = $100 per unit short;  Co = 0.0625 * price per quarter
+  q*(price) = Cu / (Cu + Co)  =>  q* = 0.5 exactly at price $1,600
+  which is the empirically observed regime crossover.
+
+  q* median 0.981   p10 0.771   p90 0.999
+  share of SKUs needing q* > 0.5 (stock ABOVE the median): 96.8 %
+
+  MAE targets the 0.5 fractile for every SKU regardless of price, so it
+  is aligned with the cost structure at exactly one price and points the
+  wrong way on both sides of it.
+
+FLEET-LEVEL rho(metric, cost) ACROSS THE 11 FORECASTERS
+  subset                               MAE       pinball at q*
+  all                     +0.018 (p=0.958)     -0.491 (p=0.125)
+  stockout_dominated      -0.345 (p=0.298)     +0.227 (p=0.502)
+  holding_dominated       +0.591 (p=0.056)     +0.809 (p=0.003)
+
+PER-SKU rho ACROSS THE 11 FORECASTERS (demand-active SKUs)
+  MAE     vs cost      mean +0.388  median +0.589  n=5,341
+  pinball vs cost      mean -0.304  median -0.498  n=5,929
+  MAE     vs level     mean +0.486  median +0.998  n=5,341
+  pinball vs level     mean -0.791  median -1.000  n=5,929

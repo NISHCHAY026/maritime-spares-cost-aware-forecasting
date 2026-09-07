@@ -1,0 +1,46 @@
+CENSORED-WINDOW COMPARISON (10 models, like-for-like)
+==============================================================================
+
+A_clean  [train Q1-16, test Q17-20]  H=4  demand-active 38.6%  demand-active tau +0.405 [+0.386,+0.423]
+  rank MODEL         meanMAE    meanCost    fill
+  1    HURDLE_NB       8.595       2,554   0.965
+  2    ZIP             8.595       2,555   0.966
+  3    TSB             8.633       2,564   0.965
+  4    SBA             8.948       2,581   0.965
+  5    CROSTON         9.107       2,585   0.965
+  6    IMAPA           8.201       2,607   0.965
+  7    SES             7.889       2,657   0.965
+  8    ADIDA           8.311       2,691   0.963
+  9    MA              7.598       2,879   0.956
+  10   LGBM            8.775       2,936   0.980
+
+B_censored  [train Q1-16, test Q25-28]  H=4  demand-active 11.4%  demand-active tau +0.426 [+0.393,+0.463]
+  rank MODEL         meanMAE    meanCost    fill
+  1    HURDLE_NB       8.569       2,562   0.986
+  2    ZIP             8.569       2,563   0.987
+  3    TSB             8.876       2,572   0.986
+  4    SBA             9.152       2,584   0.986
+  5    CROSTON         9.533       2,590   0.986
+  6    IMAPA           8.527       2,636   0.986
+  7    SES             8.474       2,695   0.986
+  8    ADIDA           8.498       2,704   0.986
+  9    MA              8.300       2,896   0.983
+  10   LGBM            9.581       3,039   0.992
+
+C_naive_original  [train Q1-20, test Q21-28]  H=8  demand-active 34.0%  demand-active tau +0.576 [+0.560,+0.593]
+  rank MODEL         meanMAE    meanCost    fill
+  1    MA              6.553       3,848   0.963
+  2    LGBM            7.878       4,294   0.991
+  3    SES             7.154       4,419   0.973
+  4    IMAPA           7.583       4,504   0.974
+  5    ADIDA           7.692       4,553   0.972
+  6    HURDLE_NB       8.272       4,780   0.973
+  7    ZIP             8.272       4,782   0.974
+  8    TSB             8.147       4,790   0.973
+  9    SBA             8.840       4,822   0.974
+  10   CROSTON         9.142       4,836   0.974
+
+MA cost rank by window (the contribution's claim):
+  A_clean            MA rank 9 of 10   (cheapest = HURDLE_NB, dearest = LGBM)
+  B_censored         MA rank 9 of 10   (cheapest = HURDLE_NB, dearest = LGBM)
+  C_naive_original   MA rank 1 of 10   (cheapest = MA, dearest = CROSTON)

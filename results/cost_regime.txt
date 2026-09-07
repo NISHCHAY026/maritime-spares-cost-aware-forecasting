@@ -1,0 +1,16 @@
+COST-REGIME SPLIT OF THE ACCURACY-COST RELATIONSHIP
+========================================================================
+holding = (0.25/4) * unit_price per unit-quarter; stockout = $100 per unit-quarter
+=> equal at unit price $1,600
+
+3.2% of SKUs are holding-dominant, and they carry 82.3% of all simulated cost.
+
+lost_sales_dominant  n=14,861
+   fleet-level Spearman rho(MAE, cost) = -0.345  (p=0.298)
+   most accurate = CHRONOS   cheapest = LGBM
+   per-SKU tau (demand-active) = +0.385 [+0.368,+0.403] N=5,239
+
+holding_dominant  n=487
+   fleet-level Spearman rho(MAE, cost) = +0.591  (p=0.056)
+   most accurate = CHRONOS   cheapest = CHRONOS
+   per-SKU tau (demand-active) = +0.491 [+0.361,+0.619] N=102

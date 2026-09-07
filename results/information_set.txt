@@ -1,0 +1,50 @@
+EQUAL INFORMATION SETS: SBA / CROSTON / TSB GIVEN THE FINAL QUARTER
+==============================================================================
+
+Croston, SBA and TSB smooth from actuals[t-1], so reading forecast[:, -1]
+on a 16-quarter window produced a forecast whose state had consumed only
+15 quarters. The other eight forecasters condition on the full window.
+The terminal update runs one more iteration of the same recurrence.
+
+1. HOW FAR THE FORECAST MOVES
+   19.7 % of SKUs had demand in the final training quarter.
+   MODEL        % moved   mean |shift|   mean shift   |shift| if fired
+   SBA            19.7%         0.2218      +0.0773             1.1285
+   CROSTON        19.7%         0.2800      +0.0972             1.4245
+   TSB            64.1%         0.5698      -0.0002             1.7741
+
+2. EFFECT ON THE MODEL COMPARISON
+   MODEL        MAE base    MAE eq     d %    cost base   cost eq     d %
+   SBA             8.948     8.916   -0.36        2,581     2,573   -0.30   <-- affected
+   SES             7.889     7.889   +0.00        2,657     2,657   +0.00
+   MA              7.598     7.598   +0.00        2,879     2,879   +0.00
+   CROSTON         9.107     9.072   -0.37        2,585     2,577   -0.31   <-- affected
+   TSB             8.633     8.450   -2.12        2,564     2,550   -0.56   <-- affected
+   ADIDA           8.311     8.311   +0.00        2,691     2,691   +0.00
+   IMAPA           8.201     8.201   +0.00        2,607     2,607   +0.00
+   ZIP             8.595     8.595   +0.00        2,555     2,555   +0.00
+   HURDLE_NB       8.595     8.595   +0.00        2,554     2,554   +0.00
+   LGBM            8.775     8.775   +0.00        2,936     2,936   +0.00
+   CHRONOS         6.525     6.525   +0.00        2,097     2,097   +0.00
+
+   8 of 11 models are bit-identical across the
+   two arms, which is the check that the patch touched nothing else.
+
+3. HEADLINE STATISTICS, BOTH ARMS
+   STATISTIC                           base      equal-info
+   pooled rho                        +0.018          +0.018
+     95 % CI                 [-0.291,+0.764] [-0.291,+0.709]
+   stockout-dominated rho            -0.345          -0.464
+     95 % CI                 [-0.755,+0.455] [-0.800,+0.255]
+   holding-dominated rho             +0.591          +0.591
+     95 % CI                 [+0.445,+1.000] [+0.454,+1.000]
+   tau (demand-active)               +0.387          +0.387
+   tau (pooled)                      +0.778          +0.777
+   deployed gap %                    -50.75          -50.92
+   cheapest on overlap            HURDLE_NB             TSB
+
+4. RANKINGS
+   cost, base       : CHRONOS, HURDLE_NB, ZIP, TSB, SBA, CROSTON, IMAPA, SES, ADIDA, MA, LGBM
+   cost, equal-info : CHRONOS, TSB, HURDLE_NB, ZIP, SBA, CROSTON, IMAPA, SES, ADIDA, MA, LGBM
+   MAE,  base       : CHRONOS, MA, SES, IMAPA, ADIDA, HURDLE_NB, ZIP, TSB, LGBM, SBA, CROSTON
+   MAE,  equal-info : CHRONOS, MA, SES, IMAPA, ADIDA, TSB, HURDLE_NB, ZIP, LGBM, SBA, CROSTON

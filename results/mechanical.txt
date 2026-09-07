@@ -1,0 +1,39 @@
+MECHANICAL DECOMPOSITION OF THE ACCURACY-COST RELATIONSHIP
+==========================================================================
+
+MODEL          level      MAE       cost    holding  stockout
+CHRONOS        4.288    6.525      2,097      1,768       315
+HURDLE_NB      7.670    8.595      2,554      2,311       231
+ZIP            7.670    8.595      2,555      2,311       230
+TSB            7.984    8.633      2,564      2,317       235
+SBA            8.266    8.948      2,581      2,336       233
+CROSTON        8.737    9.107      2,585      2,345       228
+IMAPA          7.575    8.201      2,607      2,363       232
+SES            7.553    7.889      2,657      2,424       221
+ADIDA          7.555    8.311      2,691      2,432       247
+MA             7.377    7.598      2,879      2,613       251
+LGBM           8.501    8.775      2,936      2,768       155
+
+--- ALL (n=15,348) ---
+  rho(MAE, cost)              = +0.018 (p=0.958)   <- headline
+  rho(level, cost)            = +0.055              <- mechanical channel
+  rho(MAE, level)             = +0.982
+  partial rho(MAE, cost|level)= -0.187   <- what survives
+  rho(MAE, holding)           = +0.018 (p=0.958)
+  rho(MAE, stockout)          = -0.509 (p=0.110)
+
+--- stockout-dominated (n=14,861) ---
+  rho(MAE, cost)              = -0.345 (p=0.298)   <- headline
+  rho(level, cost)            = -0.491              <- mechanical channel
+  rho(MAE, level)             = +0.964
+  partial rho(MAE, cost|level)= +0.548   <- what survives
+  rho(MAE, holding)           = +0.827 (p=0.002)
+  rho(MAE, stockout)          = -0.509 (p=0.110)
+
+--- holding-dominated (n=487) ---
+  rho(MAE, cost)              = +0.591 (p=0.056)   <- headline
+  rho(level, cost)            = +0.591              <- mechanical channel
+  rho(MAE, level)             = +1.000
+  partial rho(MAE, cost|level)= +0.000   <- what survives
+  rho(MAE, holding)           = +0.591 (p=0.056)
+  rho(MAE, stockout)          = +0.091 (p=0.790)

@@ -1,0 +1,65 @@
+{
+  "tau_mae": {
+    "mean": 0.39100536446749057,
+    "lo": 0.3724564737455314,
+    "hi": 0.40830886307599235,
+    "n_valid": 4920
+  },
+  "tau_mase": {
+    "mean": 0.39277756452265905,
+    "lo": 0.3731333412469852,
+    "hi": 0.41120566320540475,
+    "n_valid": 4902
+  },
+  "tau_rmsse": {
+    "mean": 0.1746683844384722,
+    "lo": 0.15389638220512952,
+    "hi": 0.1923078967814048,
+    "n_valid": 5457
+  },
+  "zip_seed_deltas": [
+    -14.843933515756028,
+    -15.096836679289707,
+    -15.454173827521894,
+    -15.327063967412622,
+    -15.420842010003605
+  ],
+  "conformal": {
+    "ZIP": {
+      "raw_delta": -14.843933515756028,
+      "conf_delta": -14.84015173854274,
+      "raw_capped": false,
+      "conf_capped": false
+    },
+    "HURDLE_NB": {
+      "raw_delta": 1.5037048242926663,
+      "conf_delta": 1.2413875875039524,
+      "raw_capped": false,
+      "conf_capped": false
+    },
+    "LGBM": {
+      "raw_delta": -64.70328031929579,
+      "conf_delta": -64.68721332476673,
+      "raw_capped": false,
+      "conf_capped": false
+    },
+    "CHRONOS": {
+      "raw_delta": 4.206977242943071,
+      "conf_delta": 3.9377901318744923,
+      "raw_capped": false,
+      "conf_capped": false
+    }
+  },
+  "dep_dom_cells": 80,
+  "winners": {
+    "HURDLE_NB": 13,
+    "IMAPA": 31,
+    "CHRONOS": 23,
+    "ZIP": 9,
+    "ADIDA": 2,
+    "SBA": 2
+  },
+  "sim_corr": 0.6630061454511607,
+  "sim_ratio": 0.5,
+  "sim_dep_fill": 0.864139366407223
+}

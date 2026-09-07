@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Local path overrides: never committed
+code/config_local.py
+
+# Secrets: never committed
+.env
+*.key
+*.salt
+.salt
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz

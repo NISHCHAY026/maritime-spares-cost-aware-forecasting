@@ -1,0 +1,35 @@
+{
+  "crossover_price_usd": 1600.0,
+  "holding_rate_per_year": 0.25,
+  "stockout_per_unit_qtr": 100.0,
+  "share_skus_holding_dominant": 0.03173051863434975,
+  "share_cost_in_holding_dominant": 0.8230481820511485,
+  "groups": {
+    "lost_sales_dominant": {
+      "n": 14861,
+      "fleet_spearman_rho": -0.3454545454545455,
+      "fleet_p": 0.2980892209030388,
+      "most_accurate": "CHRONOS",
+      "cheapest": "LGBM",
+      "per_sku_tau_demand_active": {
+        "mean": 0.3851930161334131,
+        "lo": 0.3680098615905177,
+        "hi": 0.4030343447228206,
+        "n_valid": 5239
+      }
+    },
+    "holding_dominant": {
+      "n": 487,
+      "fleet_spearman_rho": 0.5909090909090909,
+      "fleet_p": 0.05557560428877463,
+      "most_accurate": "CHRONOS",
+      "cheapest": "CHRONOS",
+      "per_sku_tau_demand_active": {
+        "mean": 0.491112748968511,
+        "lo": 0.3614779684478066,
+        "hi": 0.6185384338310629,
+        "n_valid": 102
+      }
+    }
+  }
+}

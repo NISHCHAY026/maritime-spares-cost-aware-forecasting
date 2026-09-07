@@ -1,0 +1,32 @@
+{
+  "ALL": {
+    "rho_mae_cost": 0.018181818181818184,
+    "p": 0.9576852410216187,
+    "rho_level_cost": 0.05454545454545456,
+    "rho_mae_level": 0.9818181818181818,
+    "partial": -0.18661857123522335,
+    "rho_mae_holding": 0.018181818181818184,
+    "rho_mae_stockout": -0.5090909090909091,
+    "n": 15348
+  },
+  "stockout-dominated": {
+    "rho_mae_cost": -0.3454545454545455,
+    "p": 0.2980892209030388,
+    "rho_level_cost": -0.4909090909090909,
+    "rho_mae_level": 0.9636363636363637,
+    "partial": 0.5481185336752606,
+    "rho_mae_holding": 0.8272727272727273,
+    "rho_mae_stockout": -0.5090909090909091,
+    "n": 14861
+  },
+  "holding-dominated": {
+    "rho_mae_cost": 0.5909090909090909,
+    "p": 0.05557560428877463,
+    "rho_level_cost": 0.5909090909090909,
+    "rho_mae_level": 1.0,
+    "partial": 0.0,
+    "rho_mae_holding": 0.5909090909090909,
+    "rho_mae_stockout": 0.09090909090909091,
+    "n": 487
+  }
+}

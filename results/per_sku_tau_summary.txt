@@ -1,0 +1,55 @@
+Per-SKU Kendall tau analysis (revised v2)
+============================================================
+N (SKUs) = 15,348    M (models) = 11
+Models: ['IMAPA', 'CROSTON', 'MA', 'TSB', 'SBA', 'SES', 'ADIDA', 'ZIP', 'HURDLE_NB', 'LGBM', 'CHRONOS']
+
+Fleet-mean MAE and cost per model:
+    MODEL  mean_mae   mean_cost
+       MA  6.552826 3847.561152
+  CHRONOS  5.604433 3897.182743
+     LGBM  9.209985 4085.446148
+      SES  7.154424 4419.118672
+    IMAPA  7.583401 4504.257221
+    ADIDA  7.692128 4552.750330
+HURDLE_NB  8.272467 4780.267123
+      ZIP  8.272467 4781.623909
+      TSB  8.146987 4789.544618
+      SBA  8.840182 4822.182766
+  CROSTON  9.141986 4836.003376
+
+Per-SKU dominance: P(best-MAE = best-cost) = 0.7956
+
+Overall mean per-SKU tau = +0.7318
+  95% bootstrap CI = [+0.7260, +0.7376]
+  N_valid = 15,348
+
+Per-(Segment x ABC) tau:
+     segment     abc  n_skus  mean_tau    lo    hi
+      Smooth       A     259     0.645 0.589 0.699
+      Smooth       B      12       NaN   NaN   NaN
+      Smooth       C       2       NaN   NaN   NaN
+      Smooth Unknown      14       NaN   NaN   NaN
+     Erratic       A     208     0.605 0.532 0.667
+     Erratic       B       5       NaN   NaN   NaN
+     Erratic       C       0       NaN   NaN   NaN
+     Erratic Unknown       8       NaN   NaN   NaN
+Intermittent       A    1579     0.739 0.720 0.757
+Intermittent       B    1579     0.719 0.701 0.737
+Intermittent       C    1579     0.810 0.797 0.822
+Intermittent Unknown    1579     0.762 0.746 0.777
+       Lumpy       A    1579     0.698 0.679 0.718
+       Lumpy       B     962     0.579 0.547 0.612
+       Lumpy       C    1579     0.654 0.632 0.679
+       Lumpy Unknown    1142     0.636 0.605 0.664
+     Unknown       A       1       NaN   NaN   NaN
+     Unknown       B     103     0.833 0.789 0.870
+     Unknown       C    1579     0.846 0.837 0.854
+     Unknown Unknown    1579     0.816 0.805 0.827
+
+Per-Segment tau (collapsed):
+     segment  n_skus  mean_tau    lo    hi
+      Smooth     287     0.638 0.585 0.693
+     Erratic     221     0.602 0.533 0.667
+Intermittent    6316     0.758 0.749 0.766
+       Lumpy    5262     0.650 0.637 0.664
+     Unknown    3262     0.831 0.824 0.838

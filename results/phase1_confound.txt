@@ -1,0 +1,26 @@
+PHASE 1 - THE MAE / FORECAST-LEVEL CONFOUND
+==========================================================================
+
+A. ANALYTIC CONDITION
+   For a flat forecast f > 0, dMAE/df = (#{f > d_t} - #{f < d_t}) / H.
+   If median(d) = 0 then MAE is strictly increasing in f for all f > 0,
+   so MAE-rank IS level-rank (inverted) on that SKU, by identity.
+
+   SKUs with median(test) = 0 : 77.3 %
+   ... of which all-zero      : 61.4 % of the sample
+   among demand-active SKUs   : 41.3 % still have median 0
+
+B. PER-SKU RANK CORRELATIONS ACROSS THE 11 FORECASTERS
+   (n = SKUs with variation on both sides, not n = 11 models)
+   level vs MAE   (all SKUs)        mean +0.814  median +1.000  share=+1  78.6 %  n=14,760
+   level vs MAE   (demand-active)   mean +0.486  median +0.998  share=+1  40.9 %  n=5,341
+   level vs cost  (all SKUs)        mean +0.807  median +1.000  share=+1  66.9 %  n=15,348
+   level vs cost  (demand-active)   mean +0.500  median +0.970  share=+1  33.6 %  n=5,929
+   MAE   vs cost  (demand-active)   mean +0.388  median +0.589  share=+1  24.8 %  n=5,341
+
+C. STRUCTURAL READING
+   Under the model-agnostic sigma the policy sees the forecast only
+   through D_bar, so per-SKU cost is a deterministic function of
+   level. The level-vs-cost row above is that function's rank
+   signature: where it is +/-1 for essentially every SKU, no
+   point-error metric can add information about cost beyond level.

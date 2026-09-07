@@ -1,0 +1,40 @@
+PAIRED BOOTSTRAP INFERENCE  (B = 20,000, resampling 15,348 SKUs, seed 42)
+==============================================================================
+
+1. MEAN COST PER MODEL, 95 % percentile CI
+   MODEL              mean                   95 % CI
+   CHRONOS           2,097   [      545,     5,089]
+   HURDLE_NB         2,554   [      532,     6,536]
+   ZIP               2,555   [      533,     6,537]
+   TSB               2,564   [      537,     6,551]
+   SBA               2,581   [      538,     6,598]
+   CROSTON           2,585   [      540,     6,607]
+   IMAPA             2,607   [      532,     6,693]
+   SES               2,657   [      521,     6,869]
+   ADIDA             2,691   [      544,     6,916]
+   MA                2,879   [      545,     7,485]
+   LGBM              2,936   [      900,     6,795]
+
+2. PAIRED DIFFERENCE vs the cheapest model (CHRONOS)
+   'resolved' means the 95 % CI on the paired difference excludes zero.
+   MODEL            diff                 95 % CI   resolved
+   HURDLE_NB         457   [     -232,     1,611]   NO
+   ZIP               458   [     -231,     1,612]   NO
+   TSB               467   [     -225,     1,627]   NO
+   SBA               484   [     -222,     1,672]   NO
+   CROSTON           488   [     -221,     1,682]   NO
+   IMAPA             510   [     -219,     1,755]   NO
+   SES               560   [     -240,     1,939]   NO
+   ADIDA             594   [     -200,     1,978]   NO
+   MA                783   [     -217,     2,563]   NO
+   LGBM              839   [      212,     1,834]   yes
+
+   1 of 10 models are distinguishable from the cheapest.
+
+3. FLEET-LEVEL rho(MAE, cost) WITH A CI (bootstrapping SKUs, not models)
+   all SKUs               +0.018   [-0.29, +0.75]   INCLUDES 0  P(rho<=0) = 0.4469
+   stockout-dominated     -0.345   [-0.76, +0.44]   INCLUDES 0  P(rho<=0) = 0.7271
+   holding-dominated      +0.591   [+0.49, +1.00]   excludes 0  P(rho<=0) = 0.0014
+
+4. DEPLOYED GAP on the 1,579-SKU overlap (best model vs deployed)
+   -50.7 %   [-60.2 %, -41.0 %]

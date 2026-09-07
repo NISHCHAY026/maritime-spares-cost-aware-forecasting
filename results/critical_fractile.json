@@ -1,0 +1,52 @@
+{
+  "crossover_price": 1600.0,
+  "qstar_median": 0.9814821223118184,
+  "qstar_p10": 0.7711337655943297,
+  "qstar_p90": 0.9993753903810119,
+  "share_qstar_above_half": 0.9682694813656503,
+  "fleet": {
+    "all": {
+      "mae_rho": 0.018181818181818184,
+      "mae_p": 0.9576852410216187,
+      "pinball_rho": -0.4909090909090909,
+      "pinball_p": 0.12520440713849534,
+      "n": 15348
+    },
+    "stockout_dominated": {
+      "mae_rho": -0.3454545454545455,
+      "mae_p": 0.2980892209030388,
+      "pinball_rho": 0.22727272727272727,
+      "pinball_p": 0.501535667604937,
+      "n": 14861
+    },
+    "holding_dominated": {
+      "mae_rho": 0.5909090909090909,
+      "mae_p": 0.05557560428877463,
+      "pinball_rho": 0.8090909090909091,
+      "pinball_p": 0.002558580199713915,
+      "n": 487
+    }
+  },
+  "per_sku": {
+    "mae_vs_cost_demand_active": {
+      "n": 5341,
+      "mean": 0.38816478778843894,
+      "median": 0.589041095890411
+    },
+    "pinball_vs_cost_demand_active": {
+      "n": 5929,
+      "mean": -0.30418619308888994,
+      "median": -0.497716894977169
+    },
+    "mae_vs_level_demand_active": {
+      "n": 5341,
+      "mean": 0.4855908659348358,
+      "median": 0.9977246841962695
+    },
+    "pinball_vs_level_demand_active": {
+      "n": 5929,
+      "mean": -0.7908435234206918,
+      "median": -1.0
+    }
+  }
+}

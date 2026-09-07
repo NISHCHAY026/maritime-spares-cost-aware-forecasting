@@ -1,0 +1,35 @@
+TIER-1 (clean window train Q01-16 / test Q17-20)
+================================================================
+N=15,348 demand-active=5,929
+
+#1 SCALED-ERROR ROBUSTNESS (demand-active SKUs):
+  tau(MAE-rank , cost-rank)   = +0.387 [+0.369,+0.404]  N=4,919
+  tau(MASE-rank, cost-rank)   = +0.389 [+0.369,+0.407]  N=4,902
+  tau(RMSSE-rank, cost-rank)  = +0.177 [+0.158,+0.196]  N=5,457
+
+#5 ZIP fill-matched cost delta across sampling seeds:
+  seeds 42,1,2,3,4 -> ['-15.5%', '-15.4%', '-15.2%', '-15.5%', '-15.0%']
+  mean -15.3%  range [-15.5%, -15.0%]
+
+#2 CONFORMALIZED native-quantile (global mult. conformal on train):
+  MODEL         rawΔ%   confΔ%  raw cap conf cap
+  ZIP          -15.5%   -15.5%    False    False
+  HURDLE_NB     -3.3%    -3.5%    False    False
+  LGBM         153.4% 305198344214.0%     True     True
+  CHRONOS       66.5%   220.1%     True     True
+
+#4 COST-CONFIG SWEEP (80 cells) on clean window:
+  deployed beaten by best model in 80/80 cells
+  cost-winner identity: IMAPA:31, HURDLE_NB:22, CHRONOS:13, ZIP:9, SBA:3, ADIDA:2
+
+#4 SERVICE-LEVEL SWEEP on clean window:
+  default      best=HURDLE_NB  $567  deployed $1,151  gap -51%
+  conservative best=CHRONOS    $605  deployed $1,151  gap -47%
+  aggressive   best=HURDLE_NB  $535  deployed $1,151  gap -53%
+  flat95       best=HURDLE_NB  $550  deployed $1,151  gap -52%
+
+#3 SIMULATOR CONSISTENCY (no realized-stockout history exists; partial check):
+  simulated deployed mean on-hand vs recorded In Stock (overlap, instock>0, n=1,323):
+    log-log corr = +0.663   median(sim/recorded) = 0.50
+  simulated deployed fill = 0.864  (operator's tiered availability goal 0.95-0.99)
+  -> true validation requires realized fill/stockout records, which the dataset lacks.

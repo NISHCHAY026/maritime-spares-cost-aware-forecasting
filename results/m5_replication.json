@@ -1,0 +1,72 @@
+{
+  "source": "D:\\Research Pack\\1-Research\\ai-demand-planning\\results\\m5_classical.parquet",
+  "n_series": 30490,
+  "models": [
+    "naive",
+    "sma",
+    "ses",
+    "croston",
+    "sba",
+    "tsb",
+    "adida",
+    "mapa"
+  ],
+  "level_convention": "level = oos_mean + bias  (bias = forecast - actual)",
+  "neg_level_fraction": 6.559527714004592e-05,
+  "overall": {
+    "n": 30466,
+    "mean": 0.15519870222382018,
+    "median": 0.1939429558262036,
+    "frac_eq_plus1": 0.014672093481257796,
+    "frac_gt_09": 0.09000196940852097
+  },
+  "by_class": {
+    "Erratic": {
+      "n": 1849,
+      "mean": 0.1710922982902078,
+      "median": 0.22891566265060237,
+      "frac_eq_plus1": 0.01352082206598161,
+      "frac_gt_09": 0.07517577068685775
+    },
+    "Intermittent": {
+      "n": 10424,
+      "mean": 0.18830754189159687,
+      "median": 0.25301204819277107,
+      "frac_eq_plus1": 0.017555640828856484,
+      "frac_gt_09": 0.11166538756715272
+    },
+    "Lumpy": {
+      "n": 2461,
+      "mean": 0.23950555009379987,
+      "median": 0.3012048192771084,
+      "frac_eq_plus1": 0.022348638764729784,
+      "frac_gt_09": 0.1308411214953271
+    },
+    "Smooth": {
+      "n": 15732,
+      "mean": 0.11820448938173556,
+      "median": 0.15662650602409636,
+      "frac_eq_plus1": 0.011695906432748537,
+      "frac_gt_09": 0.07100177981184846
+    }
+  },
+  "inferred_oos_horizon_weeks": 26,
+  "horizon_match_fraction": 0.9676615283699573,
+  "share_median_zero": 0.10108232207281076,
+  "conditional": {
+    "condition_met": {
+      "n": 3082,
+      "mean": 0.4876839891256926,
+      "median": 0.6144578313253012,
+      "frac_eq_plus1": 0.06164828033744322,
+      "frac_gt_09": 0.2446463335496431
+    },
+    "condition_not_met": {
+      "n": 27384,
+      "mean": 0.1177783233810079,
+      "median": 0.15662650602409636,
+      "frac_eq_plus1": 0.009385042360502483,
+      "frac_gt_09": 0.07259713701431493
+    }
+  }
+}

@@ -1,0 +1,16 @@
+Fill-matched native-quantile policy comparison
+====================================================================
+Each native-quantile policy is scaled (safety-stock multiplier
+kappa) so its fleet fill rate matches the model's own
+normal-approximation policy. Cost is then compared at equal fill.
+
+    MODEL  kappa  matched  target_fill  native_matched_fill  cost_normal_all  cost_native_all  delta_all_pct  cost_normal_pos  cost_native_pos  delta_pos_pct  fill_normal_pos  fill_native_pos
+      ZIP  1.007     True        0.974                0.974         4781.624         4880.472          2.067        12682.180        12353.387         -2.593            0.925            0.925
+HURDLE_NB  1.101     True        0.973                0.973         4780.267         5389.297         12.741        12678.187        14100.288         11.217            0.922            0.922
+     LGBM  8.000    False        0.990                0.978         4085.446        16373.612        300.779        10562.173        39182.163        270.967            0.970            0.935
+  CHRONOS  8.000    False        0.971                0.968         3897.183         4278.051          9.773        10196.478         8441.002        -17.216            0.916            0.905
+
+Reading: delta_*_pct < 0 means the fill-matched native-quantile
+policy is cheaper than the normal policy AT EQUAL FLEET FILL.
+If so, finding (2) holds: the predictive distribution allocates
+safety stock more cost-efficiently than the model-agnostic sigma.

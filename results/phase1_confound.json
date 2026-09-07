@@ -1,0 +1,56 @@
+{
+  "N": 15348,
+  "models": [
+    "SBA",
+    "SES",
+    "MA",
+    "CROSTON",
+    "TSB",
+    "ADIDA",
+    "IMAPA",
+    "ZIP",
+    "HURDLE_NB",
+    "LGBM",
+    "CHRONOS"
+  ],
+  "share_median_zero": 0.7731952045869168,
+  "share_all_zero": 0.6136955955173312,
+  "share_median_zero_among_demand_active": 0.41288581548321807,
+  "per_sku": {
+    "level_vs_mae_all": {
+      "n": 14760,
+      "mean": 0.8138577787911896,
+      "median": 1.0,
+      "frac_eq_plus1": 0.7859756097560976,
+      "frac_eq_minus1": 0.02859078590785908
+    },
+    "level_vs_mae_demand_active": {
+      "n": 5341,
+      "mean": 0.4855908659348358,
+      "median": 0.9977246841962695,
+      "frac_eq_plus1": 0.4085377270174125,
+      "frac_eq_minus1": 0.07901142108219435
+    },
+    "level_vs_cost_all": {
+      "n": 15348,
+      "mean": 0.806746337124485,
+      "median": 1.0,
+      "frac_eq_plus1": 0.6685561636695335,
+      "frac_eq_minus1": 0.020002606202762573
+    },
+    "level_vs_cost_demand_active": {
+      "n": 5929,
+      "mean": 0.5001948788039431,
+      "median": 0.9703897613415771,
+      "frac_eq_plus1": 0.3359757125990892,
+      "frac_eq_minus1": 0.0517793894417271
+    },
+    "mae_vs_cost_demand_active": {
+      "n": 5341,
+      "mean": 0.38816478778843894,
+      "median": 0.589041095890411,
+      "frac_eq_plus1": 0.24770642201834864,
+      "frac_eq_minus1": 0.053548024714472946
+    }
+  }
+}

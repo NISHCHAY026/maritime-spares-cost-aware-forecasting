@@ -1,0 +1,24 @@
+PHASE 1 POINT 4 - DOES THE PREDICTIVE DISTRIBUTION OPEN A CHANNEL?
+==========================================================================
+
+  models with quantiles: ZIP, HURDLE_NB, LGBM, CHRONOS  (only 4)
+  Fleet-level rows below therefore rest on 4 points and are shown for
+  completeness, not inference. Per-SKU rows use N = 15,348.
+
+1. IS Q_alpha A SEPARATE CHANNEL FROM THE POINT FORECAST?
+   per-SKU rho(level, Q_alpha)   mean +0.502  median +0.738  |rho|>0.99 in 14.4 % of SKUs  n=10,414
+
+2. STRUCTURAL: IS NATIVE COST DETERMINED BY Q_alpha?
+   rho(Q_alpha, native cost)    mean +0.653  median +1.000  n=10,414
+   rho(level,   native cost)    mean +0.595  median +0.816  n=13,891
+
+3. WHICH METRIC PREDICTS NATIVE-QUANTILE COST? (demand-active SKUs)
+   MAE                          mean +0.307  median +0.632  n=4,951
+   pinball at service level     mean +0.337  median +0.800  n=5,732
+   CRPS (5-quantile grid)       mean +0.196  median +0.400  n=5,828
+
+4. FLEET-LEVEL (4 points; indicative only)
+   rho(mae     , native cost) = +0.200  (p=0.800)
+   rho(pinball , native cost) = -0.400  (p=0.600)
+   rho(crps    , native cost) = +0.000  (p=1.000)
+   rho(level   , native cost) = +0.200  (p=0.800)
