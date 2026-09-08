@@ -79,17 +79,20 @@ evaluation-design choices that studies in this literature rarely report.
   between method-mean accuracy and method-mean cost rests on eleven points.
   Across nine defensible evaluation designs it runs from -0.103 to +1.000 in
   the holding-dominated group, and dropping one model moves it from +0.591 to
-  +0.455. Its SKU-bootstrap interval holds the design fixed and so understates
-  the uncertainty that matters. The per-SKU τ, computed over 15,348 SKUs,
+  +0.455. Per-arm bootstrap intervals are wide enough that the extreme
+  designs overlap, so the instrument is underpowered as well as unstable, and
+  either reading disqualifies it. The per-SKU τ, computed over 15,348 SKUs,
   stays between +0.333 and +0.435 in every design.
 * **The obvious remedy fails, and the working one is narrower than expected.**
   Scoring at each SKU's own q* is confounded with level just as badly in the
   opposite direction (per-SKU pinball-level rank correlation median -1.000).
   Under a policy that consumes the whole predictive distribution the confound
-  is escapable, but only by scoring at the fractile the decision reads:
-  pinball at the service level predicts cost better than MAE (median +0.800
-  against +0.632) while a generic five-quantile CRPS does worse (+0.400). This
-  comparison rests on the four models that emit quantiles.
+  is escapable, but only at the fractile the decision reads. On the common
+  SKU set the paired pinball-minus-MAE difference is +0.024 with an interval
+  touching zero, directional rather than established, while a generic
+  five-quantile CRPS is strictly worse than MAE (paired difference -0.107,
+  interval excluding zero). The comparison rests on the four models that emit
+  quantiles.
 * **The severity is measurable in advance.** On the public M5 data the
   level-MAE statistic has median +0.194 because the analytic condition holds
   for only 10.1 % of M5 series against 77.3 % here; conditioning on it, the
@@ -467,7 +470,22 @@ which equals 0.5 at exactly **price = \$1,600**: the crossover used in the
 table above, derived rather than observed. The derivation is single-period and
 myopic. With a saturated start most units are held for several quarters, which
 pushes the true break-even price below \$1,600, so we use \$1,600 as the
-definition of the split rather than as an estimate of the optimum. MAE implicitly targets the 0.5
+definition of the split rather than as an estimate of the optimum. The data
+agree: sweeping the split price, the correlation among SKUs above the
+threshold is positive with a bootstrap zero-share of 0.02 or less from \$100
+upward, and disjoint price bands turn significantly positive from the
+\$194-475 band on (+0.745, zero-share 0.001), so the empirical transition
+sits near the residence-time boundary (about \$400 if a unit is held for the
+full four-quarter window), well below the myopic \$1,600.
+
+**The mechanism passes a falsification test.** If the regime pattern is q*
+varying with price against a metric that targets 0.5 everywhere, then a
+price-proportional penalty, Cu = (0.25/4) x price, which fixes q* = 0.5 for
+every SKU, should make the price split stop separating the correlation. It
+does. Re-costing the same simulations with that penalty gives +0.591 above
+\$1,600 and +0.582 below, against +0.591 and -0.464 under the published
+costing. The regime contrast is a property of the penalty structure, not of
+the parts. MAE implicitly targets the 0.5
 fractile for every SKU regardless of price, so it is aligned with the cost
 structure at exactly one price and misaligned on both sides, which is why the
 correlation reverses sign instead of merely weakening. The misalignment is
@@ -488,9 +506,11 @@ metric and the cost parameters rather than about forecast quality.
 **How much does the instrument itself move?** Everything above is computed
 over eleven method means under one evaluation design, and eleven points invite
 the question of what happens under another. We re-ran the full comparison
-under nine designs: four opening inventory positions (saturated at S, the
-published choice; uniform in [s, S]; exactly at s; empty) crossed with three
-fully uncensored windows. The arms share the ten forecasters that can be fit
+under nine designs, each a combination of an opening inventory position
+(saturated at S, the published choice; uniform in [s, S]; exactly at s; empty)
+and a fully uncensored window. Nine of the twelve possible cells were run; the
+three missing cells pair a start position with a window already covered by
+both of its neighbours. The arms share the ten forecasters that can be fit
 on every window, since Chronos needs the 16-quarter context; dropping it alone
 moves the holding-dominated correlation from +0.591 to +0.455.
 
@@ -519,11 +539,33 @@ training fixed and still spans most of the range a correlation can take. All
 three windows are uncensored, and any of them could have been the published
 design.
 
+A SKU bootstrap within each arm settles what the swing means, and the answer
+is the less flattering of the two candidates. The per-arm intervals are wide:
+[-0.21, +0.99] in the arm at -0.103 and [+0.64, +1.00] in the arm at +1.000,
+and the extreme arms' intervals overlap. So the grid does not establish that
+design variation exceeds sampling variation. What it establishes is that the
+instrument is underpowered for the question: under one defensible design the
+statistic reads as confidently positive (bootstrap share of replicates at or
+below zero, 0.001), under another it is indistinguishable from zero (0.334),
+and the two readings cannot be told apart. The model set is not the cause;
+with the design held fixed, eleven models give +0.591 [+0.45, +1.00] and ten
+give +0.455 [+0.42, +1.00].
+
+The \$1,600 label is part of the problem too. It is a price split, held fixed
+while the realized cost mix moves across arms. Classifying each SKU instead by
+its realized cost mix within each arm puts 71 % to 93 % of SKUs in the
+holding-dominated group, because with these opening positions most SKUs never
+stock out, and it produces a different and equally unstable set of
+correlations, running from -0.588 to +0.818 across the same nine arms. Neither
+labelling yields a stable fleet-level statistic.
+
 The quantity that does not care is the per-SKU τ, computed over 15,348 SKUs
 rather than ten means: it sits between +0.333 and +0.435 in every arm. The
-SKU-bootstrap interval of [+0.49, +1.00] quoted above is therefore the smaller
-of two uncertainties. It captures sampling variation with the design held
-fixed, and the design variation is wider than the interval.
+interval of [+0.49, +1.00] quoted above is real, but it holds the design
+fixed, and the -0.103 arm sits far outside it while that arm's own interval
+spans [-0.21, +0.99]. Sampling and specification uncertainty are both large
+here, and the honest statement is that a rank correlation over ten or eleven
+method means is underpowered for this question under any design.
 
 ### 5.5 What to use instead
 
@@ -553,10 +595,19 @@ tracks level (+0.816). Scoring against native-quantile cost:
 | pinball at the service level | **+0.800** |
 | CRPS over the five fitted quantiles | +0.400 |
 
-The ordering is the useful result, and it is not "distributional beats point".
-A generic distributional score is *worse* than MAE, because CRPS averages over
-the whole quantile grid including the median region the decision never reads.
-What wins is the loss evaluated at the specific fractile the policy consumes.
+Those are medians of per-SKU rank correlations, and each metric's correlation
+is defined on a different SKU subset, so the referee-proof version restricts
+all three to the 4,824 demand-active SKUs where every correlation exists and
+pairs the differences within SKU. The medians are unchanged there. The paired
+differences resolve less than the medians suggest: pinball-at-service-level
+minus MAE has mean +0.024 with interval [-0.003, +0.051], touching zero, so
+the advantage over MAE is directional rather than established. What is
+established is the negative half: CRPS minus MAE is -0.107 with interval
+[-0.133, -0.082], excluding zero. A generic distributional score is strictly
+worse than the point metric it was meant to improve on, because CRPS averages
+over the whole quantile grid including the median region the decision never
+reads; the loss at the fractile the policy consumes is at worst MAE's equal
+and directionally better.
 This is Gneiting's (2011) consistency principle observed inside a deployed
 policy chain: a scoring function should be consistent for the functional the
 decision reads, and the failure of an unweighted CRPS here is the case for
@@ -750,7 +801,8 @@ It is confounded wherever the zero-median condition binds. MAE-rank is
 level-rank there, cost decomposes into a component level raises and a
 component level lowers, and the cost regime picks the sign. And it is fragile
 even setting the confound aside: eleven points under one design, moving across
-most of the admissible range under defensible design changes. Neither failure
+most of the admissible range under defensible design changes, with per-design
+intervals too wide to tell the movement from noise. Neither failure
 is visible from inside a single study, which may be part of why two decades of
 asking the question have not produced a consistent answer.
 
@@ -769,7 +821,7 @@ accuracy. Ours awards them +1.000 where holding cost dominates.
 
 Third, per-SKU paired statistics alongside the method-mean correlation, and
 the correlation's movement across at least one alternative window. A sampling
-interval on a fixed design is not the uncertainty that matters here.
+interval on a fixed design is only part of the uncertainty.
 
 Fourth, the critical fractile. q* = Cu/(Cu+Co) locates the regime boundary
 analytically, at \$1,600 here with a median q* of 0.981, and where a
@@ -863,8 +915,8 @@ that price as predicted.
 The instrument is fragile besides: across nine defensible evaluation designs
 the holding-dominated correlation runs from -0.103 to +1.000, while the
 per-SKU τ stays between +0.333 and +0.435. Scoring at q* inherits the confound
-with the sign reversed; what works is scoring the fractile the replenishment
-decision reads, under a policy that consumes the predictive distribution. On
+with the sign reversed; the fractile the replenishment decision reads escapes
+it, and a generic proper score is strictly worse than MAE. On
 public M5 data the zero-median condition holds for 10.1 % of series against
 77.3 % here, which helps reconcile why competition-data and spare-parts studies
 disagree about whether accuracy matters. Three secondary results: ten of
@@ -945,8 +997,13 @@ mode for a cost-aware forecasting study.
     draft gave the holding-dominated correlation a bootstrap interval of
     [+0.49, +1.00] and treated that as the finding's uncertainty. The interval
     resamples SKUs with the evaluation design held fixed. Varying the design
-    instead (Section 5.4) moves the same statistic from -0.103 to +1.000, so
-    the interval is the smaller of the two uncertainties.
+    instead (Section 5.4) moves the same statistic from -0.103 to +1.000, and
+    the per-arm intervals are wider still, so the quoted interval understated
+    the total uncertainty from both sources.
+12. **A flagship comparison quoted on non-identical SKU subsets.** The metric
+    ordering of Section 5.5 compared medians over different SKU sets with no
+    uncertainty attached. On the common set, paired inference establishes only
+    the CRPS half; the pinball advantage over MAE is directional.
 
 One earlier discrepancy is now resolved. A previous draft reported the
 Hurdle-NB fill-matched delta as +2.1 % in one script and -0.5 % in another, on

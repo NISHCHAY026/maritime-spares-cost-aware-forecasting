@@ -1,0 +1,20 @@
+METRIC COMPARISON ON THE COMMON SKU SET, WITH PAIRED INFERENCE
+============================================================================
+
+demand-active SKUs 5,929; correlation defined for MAE 4,951, pinball 5,732, CRPS 5,828; common set 4,824.
+
+1. ON THE COMMON SET (same SKUs for all three metrics)
+   metric                         median     mean
+   MAE                            +0.632   +0.322
+   pinball at service level       +0.800   +0.346
+   CRPS (5-quantile grid)         +0.400   +0.215
+
+2. PAIRED PER-SKU DIFFERENCES (B = 10,000)
+   pinball - MAE : mean +0.024  median +0.051  CI [-0.003, +0.051]  P(<=0) 0.0419  includes 0
+   CRPS - MAE    : mean -0.107  median -0.051  CI [-0.133, -0.082]  P(<=0) 1.0000  EXCLUDES 0
+
+3. READING
+   The Section 5.5 claim needs the pinball-minus-MAE difference to be
+   positive with an interval excluding zero on the same SKUs. Whether it
+   is, the line above decides; the four-model discrete support is a
+   stated limitation either way.

@@ -248,8 +248,10 @@ def main():
         add("start-position result reported", ["72.3", "36.2", "+0.418"], [],
             "empty start exercises the policy and the correlation barely moves")
         add("sampling vs specification uncertainty",
-            ["smaller of the two uncertainties"], [],
-            "the SKU-bootstrap interval is presented as the narrower uncertainty")
+            ["understated the total uncertainty"],
+            ["smaller of the two uncertainties"],
+            "per-arm intervals overlap, so the design swing is not separable "
+            "from sampling noise; both uncertainty sources are large")
         add("old framing retired", [],
             ["The boundary is visible:",
              "prediction, reproduced on independent operational"],
@@ -289,6 +291,28 @@ def main():
     add("quality-reading relapse fixed", [],
         ["Accuracy predicts cost where holding cost dominates, in the sample"],
         "5.10 must not re-read the confounded correlation as forecast quality")
+
+    # --- second-round computations (referee panel must-fixes) ---------------
+    gi = load("grid_inference.json")
+    if gi:
+        add("grid inference reported", ["0.334", "underpowered"], [],
+            "per-arm bootstrap: extreme arms' CIs overlap; the instrument is "
+            "underpowered, not proven design-fragile")
+        add("realized membership reported", ["-0.588", "+0.818"], [],
+            "realized cost-mix labelling is as unstable as the fixed label")
+    ploc = load("price_localization.json")
+    if ploc:
+        add("localization reported", ["+0.745", "194"], [],
+            "empirical sign transition sits near the residence-time boundary, "
+            "well below the myopic $1,600")
+        add("falsification reported", ["+0.582"], [],
+            "with q* flat at 0.5 the price split stops separating the sign")
+    pc2 = load("pinball_common.json")
+    if pc2:
+        add("pinball paired inference", ["+0.024", "-0.107", "4,824"],
+            ["predicts cost better than MAE (median +0.800"],
+            "paired common-set test: pinball advantage directional only; "
+            "CRPS strictly worse is the resolved half")
 
     # --- run --------------------------------------------------------------
     # The reproducibility note deliberately quotes superseded values ("moved

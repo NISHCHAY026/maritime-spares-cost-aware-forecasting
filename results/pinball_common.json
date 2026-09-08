@@ -1,0 +1,43 @@
+{
+  "N": 15348,
+  "n_demand_active": 5929,
+  "n_common": 4824,
+  "n_defined": {
+    "mae": 4951,
+    "pinball": 5732,
+    "crps": 5828
+  },
+  "common_set": {
+    "mae": {
+      "mean": 0.32195212026897047,
+      "median": 0.632455532033676
+    },
+    "pinball": {
+      "mean": 0.3460945311410238,
+      "median": 0.7999999999999999
+    },
+    "crps": {
+      "mean": 0.21469042520352166,
+      "median": 0.39999999999999997
+    }
+  },
+  "paired_pinball_minus_mae": {
+    "mean": 0.024142410872053283,
+    "median": 0.05131670194948612,
+    "lo": -0.0030937855809834527,
+    "hi": 0.0514064394017238,
+    "p_le_zero": 0.0419,
+    "excludes_zero": false,
+    "B": 10000
+  },
+  "paired_crps_minus_mae": {
+    "mean": -0.10726169506544883,
+    "median": -0.05131670194948612,
+    "lo": -0.13294590841656892,
+    "hi": -0.08231160162719443,
+    "p_le_zero": 1.0,
+    "excludes_zero": true,
+    "B": 10000
+  },
+  "note": "four quantile-emitting models; per-SKU rank correlations over four points have discrete support"
+}
