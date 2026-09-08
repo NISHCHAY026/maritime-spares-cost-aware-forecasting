@@ -140,8 +140,9 @@ def main():
 
     # ---------------- report ----------------
     L = ["INFERENCE FOR THE SPECIFICATION GRID", "=" * 100, "",
-         f"SKU bootstrap, B = {B:,}, on the {'eleven' if have_ctx12 else 'ten common'} "
-         "forecasters per arm.", "",
+         f"SKU bootstrap, B = {B:,}. Sections 1-2 use the ten forecasters common "
+         "to all arms; eleven-model", "figures (Chronos included) are reported "
+         "separately where the arm carries them.", "",
          "1. HOLDING-DOMINATED CORRELATION, FIXED $1,600 LABEL vs REALIZED MEMBERSHIP",
          f"   {'ARM':<24}{'fixed rho':>10}{'95% CI':>19}{'P<=0':>7}"
          f"{'realized rho':>14}{'95% CI':>19}{'P<=0':>7}{'real.share':>11}"]
@@ -179,6 +180,19 @@ def main():
               f"P(rho<=0)={t['p_le_zero']:.4f}",
               "   The model-set effect sits inside both intervals; the design effect",
               "   in section 1 is measured with the model set held constant."]
+
+    if all("holding_dominated_all_models" in a for a in results.values()):
+        L += ["", "4. ELEVEN-MODEL HOLDING-DOMINATED FIGURE PER ARM",
+              "   (Chronos refit on the 12-quarter context for the 1-12 arms)",
+              f"   {'ARM':<24}{'rho':>8}{'95% CI':>19}{'P<=0':>7}"]
+        for k, a in results.items():
+            e = a["holding_dominated_all_models"]
+            L.append(f"   {k:<24}{e['point']:>+8.3f}"
+                     f"{f'[{e[chr(108)+chr(111)]:+.2f},{e[chr(104)+chr(105)]:+.2f}]':>19}"
+                     f"{e['p_le_zero']:>7.3f}")
+        e11 = [a["holding_dominated_all_models"] for a in results.values()]
+        L.append(f"   range: {min(x['point'] for x in e11):+.3f} to "
+                 f"{max(x['point'] for x in e11):+.3f}")
 
     rep = "\n".join(L)
     (ROB / "grid_inference.txt").write_text(rep, encoding="utf-8")

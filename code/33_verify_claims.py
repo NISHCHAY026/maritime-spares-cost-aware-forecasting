@@ -300,6 +300,14 @@ def main():
             "underpowered, not proven design-fragile")
         add("realized membership reported", ["-0.588", "+0.818"], [],
             "realized cost-mix labelling is as unstable as the fixed label")
+        e11 = [a.get("holding_dominated_all_models")
+               for a in gi["arms"].values()]
+        if all(e11):
+            lo11 = min(e11, key=lambda x: x["point"])
+            add("eleven-model grid reported",
+                [f"{lo11['point']:+.3f}", f"{lo11['p_le_zero']:.3f}"], [],
+                "refit Chronos puts eleven models in every arm; the swing "
+                "widens and the extreme intervals still overlap")
     ploc = load("price_localization.json")
     if ploc:
         add("localization reported", ["+0.745", "194"], [],

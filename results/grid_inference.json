@@ -2,7 +2,7 @@
   "B": 2000,
   "seed": 42,
   "crossover_price_usd": 1600.0,
-  "chronos_ctx12_available": false,
+  "chronos_ctx12_available": true,
   "arms": {
     "published      S / H=4": {
       "n_models": 11,
@@ -269,10 +269,10 @@
       }
     },
     "train12        S / H=4": {
-      "n_models": 10,
+      "n_models": 11,
       "common_models": 10,
       "share_holding_dominated_fixed": 0.03173051863434975,
-      "share_holding_dominated_realized": 0.9015506906437321,
+      "share_holding_dominated_realized": 0.9005082095387021,
       "fixed": {
         "all": {
           "point": 0.6848484848484848,
@@ -309,28 +309,36 @@
           "B": 2000
         },
         "stockout_dominated": {
-          "point": 0.3939393939393939,
-          "lo": -0.030606060606060585,
-          "hi": 0.4666666666666666,
-          "p_le_zero": 0.033,
-          "n": 1511,
+          "point": 0.3696969696969697,
+          "lo": -0.2121212121212121,
+          "hi": 0.4545454545454545,
+          "p_le_zero": 0.0725,
+          "n": 1527,
           "B": 2000
         },
         "holding_dominated": {
           "point": 0.38181818181818183,
-          "lo": -0.2606060606060606,
+          "lo": -0.24848484848484845,
           "hi": 0.8909090909090909,
-          "p_le_zero": 0.0955,
-          "n": 13837,
+          "p_le_zero": 0.0985,
+          "n": 13821,
           "B": 2000
         }
+      },
+      "holding_dominated_all_models": {
+        "point": -0.23636363636363636,
+        "lo": -0.3727272727272728,
+        "hi": 0.990909090909091,
+        "p_le_zero": 0.447,
+        "n": 487,
+        "B": 2000
       }
     },
     "train12      mid / H=4": {
-      "n_models": 10,
+      "n_models": 11,
       "common_models": 10,
       "share_holding_dominated_fixed": 0.03173051863434975,
-      "share_holding_dominated_realized": 0.877964555642429,
+      "share_holding_dominated_realized": 0.8770523846755277,
       "fixed": {
         "all": {
           "point": 0.6,
@@ -368,27 +376,35 @@
         },
         "stockout_dominated": {
           "point": 0.2606060606060606,
-          "lo": -0.24878787878787872,
-          "hi": 0.4424242424242424,
-          "p_le_zero": 0.1595,
-          "n": 1873,
+          "lo": -0.24848484848484845,
+          "hi": 0.43030303030303024,
+          "p_le_zero": 0.154,
+          "n": 1887,
           "B": 2000
         },
         "holding_dominated": {
           "point": 0.38181818181818183,
-          "lo": -0.32121212121212117,
-          "hi": 0.8787878787878788,
-          "p_le_zero": 0.1305,
-          "n": 13475,
+          "lo": -0.29696969696969694,
+          "hi": 0.8909090909090909,
+          "p_le_zero": 0.119,
+          "n": 13461,
           "B": 2000
         }
+      },
+      "holding_dominated_all_models": {
+        "point": -0.23636363636363636,
+        "lo": -0.3638636363636364,
+        "hi": 0.990909090909091,
+        "p_le_zero": 0.4475,
+        "n": 487,
+        "B": 2000
       }
     },
     "published      S / H=8": {
-      "n_models": 10,
+      "n_models": 11,
       "common_models": 10,
       "share_holding_dominated_fixed": 0.03173051863434975,
-      "share_holding_dominated_realized": 0.8518373729476153,
+      "share_holding_dominated_realized": 0.8505342715663279,
       "fixed": {
         "all": {
           "point": 0.34545454545454546,
@@ -425,28 +441,36 @@
           "B": 2000
         },
         "stockout_dominated": {
-          "point": 0.4424242424242424,
-          "lo": -0.12757575757575754,
+          "point": 0.4545454545454545,
+          "lo": -0.06696969696969694,
           "hi": 0.4545454545454545,
-          "p_le_zero": 0.0395,
-          "n": 2274,
+          "p_le_zero": 0.033,
+          "n": 2294,
           "B": 2000
         },
         "holding_dominated": {
           "point": 0.34545454545454546,
-          "lo": -0.28484848484848485,
-          "hi": 0.9151515151515152,
-          "p_le_zero": 0.1725,
-          "n": 13074,
+          "lo": -0.32121212121212117,
+          "hi": 0.8909090909090909,
+          "p_le_zero": 0.1605,
+          "n": 13054,
           "B": 2000
         }
+      },
+      "holding_dominated_all_models": {
+        "point": 1.0,
+        "lo": 0.6088636363636364,
+        "hi": 1.0,
+        "p_le_zero": 0.0,
+        "n": 487,
+        "B": 2000
       }
     },
     "mid-cycle    mid / H=8": {
-      "n_models": 10,
+      "n_models": 11,
       "common_models": 10,
       "share_holding_dominated_fixed": 0.03173051863434975,
-      "share_holding_dominated_realized": 0.827860307531926,
+      "share_holding_dominated_realized": 0.8271436017722179,
       "fixed": {
         "all": {
           "point": 0.2727272727272727,
@@ -484,27 +508,35 @@
         },
         "stockout_dominated": {
           "point": 0.43030303030303024,
-          "lo": -0.01818181818181818,
+          "lo": -0.09151515151515145,
           "hi": 0.4545454545454545,
-          "p_le_zero": 0.029,
-          "n": 2642,
+          "p_le_zero": 0.039,
+          "n": 2653,
           "B": 2000
         },
         "holding_dominated": {
           "point": 0.34545454545454546,
-          "lo": -0.32121212121212117,
+          "lo": -0.30939393939393933,
           "hi": 0.8909090909090909,
-          "p_le_zero": 0.1745,
-          "n": 12706,
+          "p_le_zero": 0.196,
+          "n": 12695,
           "B": 2000
         }
+      },
+      "holding_dominated_all_models": {
+        "point": 1.0,
+        "lo": 0.5636363636363637,
+        "hi": 1.0,
+        "p_le_zero": 0.0,
+        "n": 487,
+        "B": 2000
       }
     },
     "empty       zero / H=8": {
-      "n_models": 10,
+      "n_models": 11,
       "common_models": 10,
       "share_holding_dominated_fixed": 0.03173051863434975,
-      "share_holding_dominated_realized": 0.7107114933541829,
+      "share_holding_dominated_realized": 0.7116888193901486,
       "fixed": {
         "all": {
           "point": 0.12727272727272726,
@@ -542,20 +574,28 @@
         },
         "stockout_dominated": {
           "point": 0.406060606060606,
-          "lo": -0.34575757575757576,
+          "lo": -0.3696969696969697,
           "hi": 0.7212121212121211,
-          "p_le_zero": 0.1575,
-          "n": 4440,
+          "p_le_zero": 0.1595,
+          "n": 4425,
           "B": 2000
         },
         "holding_dominated": {
           "point": 0.8181818181818182,
-          "lo": -0.16363636363636364,
-          "hi": 0.8787878787878788,
-          "p_le_zero": 0.0765,
-          "n": 10908,
+          "lo": -0.1515151515151515,
+          "hi": 0.8790909090909075,
+          "p_le_zero": 0.0775,
+          "n": 10923,
           "B": 2000
         }
+      },
+      "holding_dominated_all_models": {
+        "point": 0.9454545454545454,
+        "lo": 0.3454545454545455,
+        "hi": 0.990909090909091,
+        "p_le_zero": 0.0005,
+        "n": 487,
+        "B": 2000
       }
     }
   }

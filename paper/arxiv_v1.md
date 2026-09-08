@@ -510,9 +510,13 @@ under nine designs, each a combination of an opening inventory position
 (saturated at S, the published choice; uniform in [s, S]; exactly at s; empty)
 and a fully uncensored window. Nine of the twelve possible cells were run; the
 three missing cells pair a start position with a window already covered by
-both of its neighbours. The arms share the ten forecasters that can be fit
-on every window, since Chronos needs the 16-quarter context; dropping it alone
-moves the holding-dominated correlation from +0.591 to +0.455.
+both of its neighbours. The table holds the model set fixed at the ten
+forecasters shared by every window; dropping Chronos, whose published
+forecasts condition on the 16-quarter context, moves the holding-dominated
+correlation from +0.591 to +0.455, so the design comparison is run on the
+common set. Chronos was also refit zero-shot on the 12-quarter context, which
+puts all eleven models in every arm; that comparison appears below and makes
+matters worse, not better.
 
 | start | window (train → test) | SKUs ordering | stockout share | ρ pooled | ρ stockout-dom. | ρ holding-dom. | τ |
 |---|---|---|---|---|---|---|---|
@@ -549,7 +553,10 @@ statistic reads as confidently positive (bootstrap share of replicates at or
 below zero, 0.001), under another it is indistinguishable from zero (0.334),
 and the two readings cannot be told apart. The model set is not the cause;
 with the design held fixed, eleven models give +0.591 [+0.45, +1.00] and ten
-give +0.455 [+0.42, +1.00].
+give +0.455 [+0.42, +1.00]. And the refit Chronos widens the swing rather
+than closing it: with all eleven models in every arm, the same statistic runs
+from -0.236 (bootstrap share at or below zero, 0.447) to +1.000, and the
+extreme arms' intervals, [-0.37, +0.99] and [+0.61, +1.00], again overlap.
 
 The \$1,600 label is part of the problem too. It is a price split, held fixed
 while the realized cost mix moves across arms. Classifying each SKU instead by

@@ -16,6 +16,13 @@ inventory, and `TERMS.md` before redistributing.
 | `results_per_sku.parquet` | 15,348 | per-SKU MAE and simulated cost, all 11 models |
 | `results_per_sku_equalinfo.parquet` | 15,348 | the same under equalised information sets |
 | `stockclass_levels.csv` | 93 | the opaque stock-class levels |
+| `forecasts_chronos_clean.parquet` | 15,348 | Chronos-T5-small forecasts, 16-quarter context (Q1-16), 1,000 seeded samples |
+| `forecasts_chronos_ctx12.parquet` | 15,348 | the same on the 12-quarter context (Q1-12), for the specification grid |
+
+The two Chronos files are model outputs, included because regenerating them
+takes several GPU-hours; every other model in the paper refits from
+`analysis_sample.parquet` in minutes. With them present, `46_grid_inference.py`
+runs all nine grid arms with eleven models.
 
 ## Columns
 
