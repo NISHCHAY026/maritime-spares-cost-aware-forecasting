@@ -515,8 +515,7 @@ forecasters shared by every window; dropping Chronos, whose published
 forecasts condition on the 16-quarter context, moves the holding-dominated
 correlation from +0.591 to +0.455, so the design comparison is run on the
 common set. Chronos was also refit zero-shot on the 12-quarter context, which
-puts all eleven models in every arm; that comparison appears below and makes
-matters worse, not better.
+puts all eleven models in every arm; that comparison appears below.
 
 | start | window (train → test) | SKUs ordering | stockout share | ρ pooled | ρ stockout-dom. | ρ holding-dom. | τ |
 |---|---|---|---|---|---|---|---|
@@ -553,14 +552,15 @@ statistic reads as confidently positive (bootstrap share of replicates at or
 below zero, 0.001), under another it is indistinguishable from zero (0.334),
 and the two readings cannot be told apart. The model set is not the cause;
 with the design held fixed, eleven models give +0.591 [+0.45, +1.00] and ten
-give +0.455 [+0.42, +1.00]. And the refit Chronos widens the swing rather
-than closing it: with all eleven models in every arm, the same statistic runs
-from -0.236 (bootstrap share at or below zero, 0.447) to +1.000, and the
-extreme arms' intervals, [-0.37, +0.99] and [+0.61, +1.00], again overlap.
+give +0.455 [+0.42, +1.00]. An eleventh model does not stabilise the grid
+either: with all eleven in every arm, the same statistic runs from -0.236
+(bootstrap share at or below zero, 0.447) to +1.000, a wider swing than the
+ten-model version, and the extreme arms' intervals, [-0.37, +0.99] and
+[+0.61, +1.00], again overlap.
 
 The \$1,600 label is part of the problem too. It is a price split, held fixed
-while the realized cost mix moves across arms. Classifying each SKU instead by
-its realized cost mix within each arm puts 71 % to 93 % of SKUs in the
+while the realised cost mix moves across arms. Classifying each SKU instead by
+its realised cost mix within each arm puts 71 % to 93 % of SKUs in the
 holding-dominated group, because with these opening positions most SKUs never
 stock out, and it produces a different and equally unstable set of
 correlations, running from -0.588 to +0.818 across the same nine arms. Neither
