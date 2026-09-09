@@ -772,7 +772,7 @@ far more intermittent than the sample: weighted, only 14.8 % of SKUs see demand
 in the test window. Chronos remains the cheapest model under weighting and the
 deployed gap is unchanged in direction and size.
 
-The regime contrast sharpens rather than dissolving, which is convenient enough
+The regime contrast sharpens rather than dissolves, which is convenient enough
 that it deserves scrutiny. A weighted correlation can be one heavy stratum
 wearing a large weight, so we decomposed it. The holding-dominated result is
 robust: it is positive within every major stratum (+0.845, +0.864, +0.809,
