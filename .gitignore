@@ -18,3 +18,12 @@ code/config_local.py
 *.log
 *.out
 *.synctex.gz
+
+# Secrets: keys, certificates, browser cookie exports, local env files
+.env
+.env.local
+*.pem
+*.key
+*.p12
+*.pfx
+cookies*.txt
